@@ -1,4 +1,4 @@
-package hillel.org.Tables;
+package hillel.org.HOMEWORK;
 
 import hillel.org.HOMEWORK.dbConfig;
 

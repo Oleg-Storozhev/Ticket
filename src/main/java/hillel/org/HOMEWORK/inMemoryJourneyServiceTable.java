@@ -1,7 +1,5 @@
 
 package hillel.org.HOMEWORK;
-import hillel.org.HOMEWORK.Const;
-import hillel.org.Tables.DatabaseHandler;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

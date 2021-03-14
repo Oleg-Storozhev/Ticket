@@ -16,4 +16,12 @@ public class TicketClient {
     public Collection<Journey> find(String stationFrom, String stationTo, LocalDate departure, LocalDate arrival) {
         return journeyService.find(stationFrom, stationTo, departure, arrival);
     }
+
+    public void afterPropertiesSet() throws Exception{
+        if(journeyService == null) throw new IllegalArgumentException("JourneyService not init");
+        else{
+            System.out.println("joureyService init successfully");
+        }
+    }
+
 }

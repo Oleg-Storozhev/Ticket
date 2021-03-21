@@ -1,12 +1,13 @@
 package hillel.org.Service;
 
+
 import hillel.org.Hibernate.TransactionJourneyService;
 import hillel.org.Hibernate.persistance.JourneyEntity;
 import hillel.org.Journey;
-import org.hibernate.cfg.Environment;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -26,7 +27,7 @@ public class TicketClient {
     private Environment environment;
 
     @Autowired
-    private TransactionJourneyService transactionJourneyService;
+    TransactionJourneyService transactionJourneyService;
 
     @Autowired
     @Qualifier("inMemoryJourneyService")
@@ -54,7 +55,7 @@ public class TicketClient {
         System.out.println("bean is destroyed");
     }
 
-    public Long createJourney(final JourneyEntity journeyEntity){
+   public Long createJourney(final JourneyEntity journeyEntity){
         return transactionJourneyService.createJourney(journeyEntity);
     }
 }

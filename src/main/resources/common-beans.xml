@@ -11,4 +11,6 @@
     <bean id = "TicketClient" class = "hillel.org.Service.TicketClient"></bean>
     <context:property-placeholder location="Aplication propertis.properties"></context:property-placeholder>
     <context:component-scan base-package="hillel.org.Config"></context:component-scan>
+    <context:component-scan base-package="hillel.org.Hibernate"></context:component-scan>
+    <context:component-scan base-package="hillel.org.Service"></context:component-scan>
 </beans>

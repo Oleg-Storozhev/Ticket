@@ -24,7 +24,6 @@ public class TransactionJourneyService implements JourneyService {
 
     @Transactional
     public Long createJourney(final JourneyEntity entity){
-        // todo check
         return journeyRepository.create(entity);
     }
 }

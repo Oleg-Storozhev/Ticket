@@ -1,4 +1,4 @@
-package hillel.org.Hibernate;
+package hillel.org.HOMEWORK_2;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
@@ -22,10 +22,10 @@ import java.util.Properties;
 @Configuration
 @PropertySource("database propertis.properties")
 @EnableTransactionManagement
-public class DatabaseConfig{
+public class ConectionPool{
 
     @Autowired
-     private Environment environment;
+    private Environment environment;
 
     @Bean
     public DataSource dataSource(){

@@ -1,12 +1,20 @@
 package hillel.org.Service;
 import hillel.org.Journey;
+import net.bytebuddy.build.Plugin;
+import org.springframework.context.annotation.Primary;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.time.LocalDate;
 import java.util.*;
-
+@Component("inMemoryJourneyService")
+@Primary
 public final class inMemoryJourneyService implements JourneyService {
+
+    public inMemoryJourneyService(){
+        System.out.println("call constructor inmemoryJourneyService");
+    }
 
     private Map <String, List<Journey>> storage = new HashMap<>();
     {
@@ -25,8 +33,11 @@ public final class inMemoryJourneyService implements JourneyService {
     @Override
     public Collection<Journey> find(String stationFrom, String stationTo, LocalDate departure, LocalDate arrival) {
         if(storage == null || storage.isEmpty()) return Collections.emptyList();
+
         List <Journey> journeys = storage.get(stationFrom + " -> " + stationTo);
+
         if(journeys == null || journeys.isEmpty()) return Collections.emptyList();
+
         List<Journey> out = new ArrayList<>();
         for(Journey item: journeys){
             if(item.getdeparture().equals(departure) && item.getarrival().equals(arrival)){

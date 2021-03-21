@@ -2,8 +2,10 @@ package hillel.org.Config;
 
 import hillel.org.Service.JourneyService;
 import hillel.org.Service.StubJourneyService;
+import hillel.org.Service.TicketClient;
 import hillel.org.Service.inMemoryJourneyService2;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
@@ -22,4 +24,5 @@ public class RootConfig {
     public JourneyService inMemoryJourneyService(){
         return new StubJourneyService();
     }
+
 }

@@ -1,9 +1,10 @@
 package hillel.org.Service;
 import hillel.org.Journey;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.util.*;
-
+//@Component("inMemoryJourneyService2")
 public final class inMemoryJourneyService2 implements JourneyService {
     private final String id;
     public inMemoryJourneyService2(final String identify) {

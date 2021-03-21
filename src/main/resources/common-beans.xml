@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
     <bean id = "inMemoryJourneyService2" class = "hillel.org.Service.inMemoryJourneyService2">
         <constructor-arg name = "identify" value="1"/>
     </bean>
     <bean id = "inMemoryJourneyService" class = "hillel.org.Service.inMemoryJourneyService" primary="true"></bean>
     <bean id = "StubJourneyService" class = "hillel.org.Service.StubJourneyService"></bean>
+    <bean id = "TicketClient" class = "hillel.org.Service.TicketClient"></bean>
+    <context:property-placeholder location="Aplication propertis.properties"></context:property-placeholder>
+    <context:component-scan base-package="hillel.org.Config"></context:component-scan>
 </beans>

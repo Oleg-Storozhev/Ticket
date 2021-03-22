@@ -13,4 +13,5 @@
     <context:component-scan base-package="hillel.org.Config"></context:component-scan>
     <context:component-scan base-package="hillel.org.Hibernate"></context:component-scan>
     <context:component-scan base-package="hillel.org.Service"></context:component-scan>
+    <context:component-scan base-package="hillel.org.HOMEWORK_2"></context:component-scan>
 </beans>

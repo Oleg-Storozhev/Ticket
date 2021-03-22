@@ -2,7 +2,6 @@ package hillel.org.HOMEWORK_2;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
-import org.hibernate.dialect.PostgreSQL10Dialect;
 import org.postgresql.ds.PGSimpleDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -17,12 +16,14 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 
 @Configuration
 @PropertySource("database propertis.properties")
 @EnableTransactionManagement
-public class ConectionPool{
+public class DBConfig{
 
     @Autowired
     private Environment environment;
@@ -41,17 +42,12 @@ public class ConectionPool{
         return dataSource;
     }
     @Bean
-    public LocalContainerEntityManagerFactoryBean enf(DataSource dataSource){
-        LocalContainerEntityManagerFactoryBean enf = new LocalContainerEntityManagerFactoryBean();
-        enf.setDataSource(dataSource);
-        enf.setPackagesToScan("hillel.org.hillel.org.Hibernate.persistance");
-        enf.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
-        Properties properties = new Properties();
-        properties.put("hibernate.dialect", PostgreSQL10Dialect.class.getName());
-        properties.put("hibernate.hdm2ddl.auto", "create-drop");
-        properties.put("hibernate.show_sql", "true");
-        enf.setJpaProperties(properties);
-        return enf;
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory() throws IOException {
+        LocalContainerEntityManagerFactoryBean en = new LocalContainerEntityManagerFactoryBean();
+        en.setDataSource(dataSource());
+        en.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
+        en.setJpaProperties(getHibernateProperties());
+        return en;
     }
     @Bean
     public PlatformTransactionManager transactionManager(EntityManagerFactory entityManagerFactory){
@@ -59,5 +55,16 @@ public class ConectionPool{
         jpaTransactionManager.setEntityManagerFactory(entityManagerFactory);
         jpaTransactionManager.setDataSource(dataSource());
         return jpaTransactionManager;
+    }
+
+    public Properties getHibernateProperties() throws IOException {
+           try {
+               Properties properties = new Properties();
+               InputStream is = getClass().getClassLoader().getResourceAsStream("hibernate.properties");
+               properties.load(is);
+               return properties;
+           }catch (IOException e){
+               throw new IllegalArgumentException("Can't find 'hibernate.properties' in classpath!", e);
+           }
     }
 }

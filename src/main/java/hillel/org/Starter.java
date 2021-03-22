@@ -1,22 +1,30 @@
 package hillel.org;
+import com.zaxxer.hikari.HikariDataSource;
 import hillel.org.Config.RootConfig;
+import hillel.org.HOMEWORK_2.*;
 import hillel.org.Hibernate.persistance.JourneyEntity;
 import hillel.org.Service.JourneyService;
 import hillel.org.HOMEWORK.inMemoryJourneyServiceTable;
 import hillel.org.Service.TicketClient;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceContext;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.util.Date;
 
 public class Starter {
-    public static void main(String[] args) throws IOException, IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException, ClassNotFoundException {
+    public static void main(String[] args) throws IOException, IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException, ClassNotFoundException, SQLException {
         System.out.println("Start");
         final ApplicationContext applicationContext = new AnnotationConfigApplicationContext(RootConfig.class);
         final JourneyService journeyservice = applicationContext.getBean("inMemoryJourneyService2", JourneyService.class);
@@ -37,13 +45,15 @@ public class Starter {
         inMemory.find("Kiev", "Lviv");
         inMemory.find("Kiev", "Odessa");
 
-        System.out.println("Hibernate");
+        /*System.out.println("Hibernate");
         final JourneyEntity journeyEntity = new JourneyEntity();
         journeyEntity.setStationFrom("Kiev");
         journeyEntity.setStationTo("Lviv");
         journeyEntity.setDateFrom(Date.from(Instant.now()));
         journeyEntity.setDateTo(Date.from(Instant.now()));
-        //System.out.println("create Journey with id = " + ticketClient.createJourney(journeyEntity));
-        
+        //System.out.println("create Journey with id = " + ticketClient.createJourney(journeyEntity));*/
+
+        System.out.println("HOMEWORK_2");
+        final HibernateService HS = new HibernateService();
     }
 }

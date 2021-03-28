@@ -3,15 +3,9 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
-    <bean id = "inMemoryJourneyService2" class = "hillel.org.Service.inMemoryJourneyService2">
-        <constructor-arg name = "identify" value="1"/>
-    </bean>
-    <bean id = "inMemoryJourneyService" class = "hillel.org.Service.inMemoryJourneyService" primary="true"></bean>
-    <bean id = "StubJourneyService" class = "hillel.org.Service.StubJourneyService"></bean>
-    <bean id = "TicketClient" class = "hillel.org.Service.TicketClient"></bean>
-    <context:property-placeholder location="Aplication propertis.properties"></context:property-placeholder>
-    <context:component-scan base-package="hillel.org.Config"></context:component-scan>
-    <context:component-scan base-package="hillel.org.Hibernate"></context:component-scan>
-    <context:component-scan base-package="hillel.org.Service"></context:component-scan>
-    <context:component-scan base-package="hillel.org.HOMEWORK_2"></context:component-scan>
+    <bean id = "inMemoryJourneyService" class = "org.hillel.service.inMemoryJourneyService" primary="true"></bean>
+    <bean id = "StubJourneyService" class = "org.hillel.service.StubJourneyService"></bean>
+    <bean id = "TicketClient" class = "org.hillel.service.TicketClient"></bean>
+    <context:property-placeholder location="application.properties"></context:property-placeholder>
+    <context:component-scan base-package="org.hillel"></context:component-scan>
 </beans>

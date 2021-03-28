@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
 @Configuration
-@ComponentScan({"hillel.org.config", "hillel.org.service", "hillel.org.hibernate"})
+@ComponentScan({"org.hillel.config", "org.hillel.service", "org.hillel.hibernate"})
 @PropertySource({"application.properties"})
 public class RootConfig {
 

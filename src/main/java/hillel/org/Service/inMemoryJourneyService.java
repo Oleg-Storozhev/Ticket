@@ -1,11 +1,9 @@
 package hillel.org.Service;
+import hillel.org.Hibernate.Entities.JourneyEntity;
 import hillel.org.Journey;
-import net.bytebuddy.build.Plugin;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.time.LocalDate;
 import java.util.*;
 @Component("inMemoryJourneyService")
@@ -45,5 +43,10 @@ public final class inMemoryJourneyService implements JourneyService {
             }
         }
         return Collections.unmodifiableList(out);
+    }
+
+    @Override
+    public Long createJourney(JourneyEntity entity) {
+        return null;
     }
 }

@@ -9,8 +9,9 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
+@ComponentScan("hillel.org.Service")
 public class RootConfig {
-    @Bean
+    @Bean("inMemoryJourneyService2")
     public JourneyService inMemoryJourneyService2(){
         return new inMemoryJourneyService2("1");
     }

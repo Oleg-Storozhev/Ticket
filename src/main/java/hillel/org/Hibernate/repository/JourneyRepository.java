@@ -1,10 +1,11 @@
 package hillel.org.Hibernate.repository;
 
-import hillel.org.Hibernate.persistance.JourneyEntity;
+import hillel.org.Hibernate.Entities.JourneyEntity;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.Optional;
 
 @Repository
 public class JourneyRepository {
@@ -17,4 +18,7 @@ public class JourneyRepository {
         return journeyEntity.getId();
     }
 
+    public Optional<JourneyEntity> findById(Long id){
+        return Optional.ofNullable(entityManager.find(JourneyEntity.class, id));
+    }
 }

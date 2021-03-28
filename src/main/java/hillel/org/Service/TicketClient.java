@@ -2,9 +2,8 @@ package hillel.org.Service;
 
 
 import hillel.org.Hibernate.TransactionJourneyService;
-import hillel.org.Hibernate.persistance.JourneyEntity;
+import hillel.org.Hibernate.Entities.JourneyEntity;
 import hillel.org.Journey;
-import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.env.Environment;
@@ -27,7 +26,8 @@ public class TicketClient {
     private Environment environment;
 
     @Autowired
-    TransactionJourneyService transactionJourneyService;
+    @Qualifier("transactionJourneyService")
+    private TransactionJourneyService transactionJourneyService;
 
     @Autowired
     @Qualifier("inMemoryJourneyService")

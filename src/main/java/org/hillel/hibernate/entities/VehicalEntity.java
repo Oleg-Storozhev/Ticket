@@ -16,7 +16,7 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
-public class VehicleEntity extends AbstractModifyEntity<Long> {
+public class VehicalEntity extends AbstractModifyEntity<Long> {
     @Column(name = "name")
     private String name;
 

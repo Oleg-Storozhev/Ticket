@@ -38,9 +38,9 @@ public class JourneyEntity extends AbstractModifyEntity<Long>{
 
     @ManyToOne(cascade = {CascadeType.PERSIST}, fetch = FetchType.LAZY)
     @JoinColumn(name = "veh_id")
-    private VehicleEntity vehicleEntity;
+    private VehicalEntity vehicleEntity;
 
-    public  void addvehicle(final VehicleEntity vehicleEntity){
+    public  void addvehicle(final VehicalEntity vehicleEntity){
         this.vehicleEntity = vehicleEntity;
     }
 

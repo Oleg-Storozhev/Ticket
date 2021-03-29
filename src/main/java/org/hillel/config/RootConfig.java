@@ -11,7 +11,7 @@ import org.springframework.context.annotation.PropertySource;
 
 @Configuration
 @ComponentScan({"org.hillel.config", "org.hillel.service", "org.hillel.hibernate"})
-@PropertySource({"application.properties"})
+@PropertySource("application.properties")
 public class RootConfig {
 
     @Bean("inMemoryJourneyService")

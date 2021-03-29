@@ -2,7 +2,6 @@ package org.hillel.config;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
-import org.hibernate.dialect.PostgreSQL10Dialect;
 import org.postgresql.ds.PGSimpleDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -22,7 +21,7 @@ import java.io.InputStream;
 import java.util.Properties;
 
 @Configuration
-@PropertySource("database.properties")
+@PropertySource("database2.properties")
 @EnableTransactionManagement
 public class DatabaseConfig {
 
@@ -42,7 +41,6 @@ public class DatabaseConfig {
         HikariDataSource dataSource = new HikariDataSource(config);
         return dataSource;
     }
-
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() throws IOException {
         LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
@@ -51,7 +49,6 @@ public class DatabaseConfig {
         emf.setJpaProperties(getHibernateProperties());
         return emf;
     }
-
     @Bean
     public PlatformTransactionManager transactionManager(EntityManagerFactory entityManagerFactory){
         JpaTransactionManager jpaTransactionManager = new JpaTransactionManager();
@@ -65,10 +62,8 @@ public class DatabaseConfig {
             Properties properties = new Properties();
             InputStream is = getClass().getClassLoader().getResourceAsStream("hibernate.properties");
             properties.load(is);
-            System.out.println(properties);
             return properties;
-        }
-        catch (IOException e){
+        } catch (IOException e){
             throw new IllegalArgumentException("Can't find 'hibernate.properties' in classpath!", e);
         }
     }

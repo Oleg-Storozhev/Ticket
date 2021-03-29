@@ -35,9 +35,8 @@ public class DatabaseConfig {
         config.setPassword(environment.getProperty("database.password"));
         config.setUsername(environment.getProperty("database.username"));
         config.setJdbcUrl(environment.getProperty("database.url"));
-        config.addDataSourceProperty("databaseName", environment.getProperty("database.url"));
+        config.addDataSourceProperty("database.name", environment.getProperty("database.url"));
 
-        config.setDataSourceClassName(PGSimpleDataSource.class.getName());
         HikariDataSource dataSource = new HikariDataSource(config);
         return dataSource;
     }

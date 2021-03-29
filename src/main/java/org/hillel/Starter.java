@@ -17,8 +17,8 @@ import java.time.LocalDate;
 public class Starter {
     public static void main(String[] args) throws Exception {
         // ASK!!!
-        System.out.println("Start");
-        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(new Class[]{RootConfig.class});
+/*        System.out.println("Start");
+        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(RootConfig.class);
         System.out.println("Check 1");
         final JourneyService journeyservice = applicationContext.getBean("inMemoryJourneyService", JourneyService.class);
         System.out.println(JourneyService.class);
@@ -28,7 +28,7 @@ public class Starter {
         System.out.println("after init");
         System.out.println(journeyservice.find("Odessa", "Lviv", LocalDate.now(), LocalDate.now().plusDays(1)));
         System.out.println(journeyservice.find("Odessa", "Lviv", LocalDate.now().plusDays(1), LocalDate.now().plusDays(2)));
-        ((ClassPathXmlApplicationContext) applicationContext).close();
+        ((ClassPathXmlApplicationContext) applicationContext).close();*/
 
         System.out.println("HomeWork");
 

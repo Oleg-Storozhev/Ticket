@@ -16,60 +16,30 @@ import java.util.Objects;
 @Setter
 @NoArgsConstructor
 @ToString
-public class JourneyEntity extends AbstractModifyEntity<Long>{
+public class JourneyEntity extends AbstractModifyEntity<Long> {
 
-    @Column (name = "Station_from", length = 1000, nullable = false, columnDefinition = "varchar(100) default 'NO_DATA'")
+    @Column(name = "station_from", length = 50, nullable = false, columnDefinition = "varchar(100) default 'NONE'")
     private String stationFrom;
 
-    @Column (name = "Station_to", length = 1000, nullable = false, columnDefinition = "varchar(100) default 'NO_DATA'")
+    @Column(name = "station_to", length = 50, nullable = false, columnDefinition = "varchar(100) default 'NONE'")
     private String stationTo;
 
-    @Column (name = "Date_from", nullable = false)
-    @Temporal(TemporalType.DATE)
+    @Column(name = "date_from", nullable = false)
     private Instant dateFrom;
 
-    @Column (name = "Date_to", nullable = false)
-    @Temporal(TemporalType.DATE)
+    @Column(name = "date_to", nullable = false)
     private Instant dateTo;
 
     @Column(name = "direction", length = 20)
     @Enumerated(EnumType.STRING)
     private DirectionType direction = DirectionType.TO;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST}, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = {CascadeType.PERSIST})
     @JoinColumn(name = "veh_id")
-    private VehicalEntity vehicleEntity;
+    private VehicalEntity vehicle;
 
-    public  void addvehicle(final VehicalEntity vehicleEntity){
-        this.vehicleEntity = vehicleEntity;
+    public void addVechicle(final VehicalEntity vehicle){
+        this.vehicle = vehicle;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof JourneyEntity)) return false;
-        JourneyEntity that = (JourneyEntity) o;
-        return getId() != null && Objects.equals(getId(), that.getId());
-    }
-
-    @Override
-    public int hashCode() {
-        return super.hashCode();
-    }
-
-/*    @ManyToMany
-    @JoinTable(name = "journey_stop", joinColumns = @JoinColumn(name = "join_id"),)
-    private List<StopEntity> stops = new ArrayList<>();*/
-
-    @Override
-    public String toString() {
-        return "JourneyEntity{" +
-                "stationFrom='" + stationFrom + '\'' +
-                ", stationTo='" + stationTo + '\'' +
-                ", dateFrom=" + dateFrom +
-                ", dateTo=" + dateTo +
-                ", direction=" + direction +
-                ", vehicleEntity=" + vehicleEntity +
-                '}';
-    }
 }

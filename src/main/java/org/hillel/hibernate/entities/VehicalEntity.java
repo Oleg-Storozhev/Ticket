@@ -20,7 +20,7 @@ public class VehicalEntity extends AbstractModifyEntity<Long> {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "vehicleEntity")
+    @OneToMany(mappedBy = "vehicle")
     private Set<JourneyEntity> journeys = new HashSet<>();
 
     public void addJourney(final JourneyEntity journeyEntity){
@@ -28,6 +28,6 @@ public class VehicalEntity extends AbstractModifyEntity<Long> {
             journeys = new HashSet<>();
         }
         journeys.add(journeyEntity);
-        journeyEntity.addvehicle(this);
+        journeyEntity.addVechicle(this);
     }
 }

@@ -1,4 +1,4 @@
-package org.hillel.homework;
+package org.hillel.homework_1;
 
 public class dbConfig {
     protected final String dbHost = "localhost";

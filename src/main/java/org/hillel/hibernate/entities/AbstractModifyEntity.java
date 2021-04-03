@@ -4,14 +4,17 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Type;
+import org.hillel.hibernate.util.YesNoConventer;
+
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.Instant;
 
 @Getter
 @Setter
 @MappedSuperclass
-public abstract class AbstractModifyEntity<ID>{
+public abstract class AbstractModifyEntity<ID extends Serializable> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,7 +25,7 @@ public abstract class AbstractModifyEntity<ID>{
     private Instant createDate;
 
     @Column(name = "active")
-    @Type(type = "true_false")
+    @Convert(converter = YesNoConventer.class)
     private boolean active = true;
 
 }

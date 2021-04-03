@@ -44,6 +44,7 @@ public class DBConfig{
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() throws IOException {
         LocalContainerEntityManagerFactoryBean en = new LocalContainerEntityManagerFactoryBean();
         en.setDataSource(dataSource());
+        en.setPackagesToScan("org.hillel.homework_2");
         en.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
         en.setJpaProperties(getHibernateProperties());
         return en;

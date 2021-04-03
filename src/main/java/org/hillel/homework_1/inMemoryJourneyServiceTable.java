@@ -1,5 +1,5 @@
 
-package org.hillel.homework;
+package org.hillel.homework_1;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

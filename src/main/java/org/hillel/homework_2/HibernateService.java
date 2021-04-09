@@ -1,38 +1,56 @@
 
 package org.hillel.homework_2;
 
+import org.hillel.Journey;
+import org.hillel.homework_1.Const;
+import org.hillel.service.JourneyService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.sql.DataSource;
 import java.sql.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
-public final class HibernateService {
+public final class HibernateService implements JourneyService {
+    private Data data;
 
-    final Connection con;
-    Statement st;
-    Homework_2 HW_2 = null;
+    public HibernateService(Data data){
+        this.data = data;
+    }
 
-    @Autowired
-    EntityManagerFactory emf;
 
-    @Autowired
-    EntityManager em;
-
-    public HibernateService() throws SQLException {
-        System.out.println("Creating new Hibernate Service");
-        ConnectionPool connectionPool = BasicConnectionPool.create("jdbc:mysql://localhost:3306/hibernatedb", "root", "");
-        con = DriverManager.getConnection(connectionPool.getUrl(), connectionPool.getUser(), connectionPool.getPassword());
-        st = con.createStatement();
-        em.getTransaction().begin();
+    @Override
+    public Collection<Journey> find(String stationFrom, String stationTo, LocalDate dateFrom, LocalDate dateTo) throws Exception {
+        Connection connection = null;
+        List<Journey> journeys = new ArrayList<>();
         try {
-            em.persist(HW_2);
-            em.getTransaction().commit();
-        } catch (Exception e) {
+            connection = data.getConnection();
+            try (PreparedStatement statement = connection.prepareStatement(
+                    "select * from tickets " +
+                            "where stationFrom = ? and stationTo = ? and departure >= ? and arrival <= ?")) {
+                statement.setString(1, stationFrom);
+                statement.setString(2, stationTo);
+                statement.setObject(3, dateFrom);
+                statement.setObject(4, dateTo);
+                ResultSet rs = statement.executeQuery();
+                if(rs == null){
+                    System.out.println("Result set is null");
+                } else {
+                    while (rs.next()) {
+                        System.out.println("==================\nStation From: " + rs.getString(Const.TICKETS_STATION_FROM) + "\nStation To: " + rs.getString(Const.TICKETS_STATION_TO) + "\ndeparture: " + rs.getString(Const.TICKETS_DEPARTURE) + "\narrival: " + rs.getString(Const.TICKETS_ARRIVAL) + "\n==================");
+                    }
+                }
+            }
+        } catch(SQLException | NullPointerException e){
             e.printStackTrace();
-            em.getTransaction().rollback();
         }
-        em.close();
-        emf.close();
+        finally {
+            data.close(connection);
+        }
+        return journeys;
     }
 }

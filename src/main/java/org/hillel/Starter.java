@@ -7,12 +7,12 @@ import org.hillel.hibernate.entities.VehicalEntity;
 import org.hillel.hibernate.enums.DirectionType;
 import org.hillel.hibernate.util.CommonInfo;
 import org.hillel.homework_1.inMemoryJourneyServiceTable;
+import org.hillel.homework_2.Data;
 import org.hillel.homework_2.HibernateService;
 import org.hillel.service.JourneyService;
 import org.hillel.service.TicketClient;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.time.Instant;
 import java.time.LocalDate;
@@ -41,11 +41,15 @@ public class Starter {
         inMemory.find("Kiev", "Lviv");
         inMemory.find("Kiev", "Odessa");
 
-
         // --------------------------------------------------------------------------------------------------------
 
-        System.out.println("HomeWork_2");
-        final HibernateService HS = new HibernateService();
+        System.out.println("HomeWork2");
+
+        final HibernateService HS = new HibernateService(new Data());
+        HS.find("Odessa", "Lviv", LocalDate.of(2021, 03,10), LocalDate.of(2021, 03,11));
+        HS.find("Odessa", "Kiev", LocalDate.of(2021, 03,10), LocalDate.of(2021, 03,11));
+        HS.find("Kiev", "Lviv", LocalDate.of(2021, 03,12), LocalDate.of(2021, 03,13));
+        HS.find("Kiev", "Odessa", LocalDate.of(2021, 03,15), LocalDate.of(2021, 03,16));
 
         // --------------------------------------------------------------------------------------------------------
 

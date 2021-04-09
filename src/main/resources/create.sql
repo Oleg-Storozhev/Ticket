@@ -1,25 +1,19 @@
-CREATE DATABASE IF NOT EXISTS ticket;
+CREATE DATABASE IF NOT EXISTS tickets;
 
-CREATE TABLE journey
-(
-    id serial,
-    station_from varchar(200) NOT NULL,
-    station_to varchar(200) NOT NULL,
-    departure date NOT NULL,
-    arrival date NOT NULL,
-    PRIMARY KEY (id)
+CREATE TABLE IF NOT EXISTS tickets(
+        id serial,
+        stationFrom varchar(200) NOT NULL,
+        stationTo varchar(200) NOT NULL,
+        departure date NOT NULL,
+        arrival date NOT NULL,
+        PRIMARY KEY (id)
 );
 
-INSERT INTO journey (station_from, station_to, departure, arrival)
-VALUES ('Odessa', 'Kiev', '10.06.2021', '11.06.2021');
-INSERT INTO journey (station_from, station_to, departure, arrival)
-VALUES ('Odessa', 'Kiev', '10.07.2021', '11.07.2021');
-INSERT INTO journey (station_from, station_to, departure, arrival)
-VALUES ('Odessa', 'Kiev', '10.08.2021', '11.08.2021');
+INSERT INTO tickets (stationFrom, stationTo, departure, arrival)
+VALUES ('Odessa', 'Kiev', '21.03.10', '21.03.11'),
+       ('Odessa', 'Lviv', '21.03.10', '21.03.11'),
+       ('Kiev', 'Lviv', '21.03.12', '21.03.13'),
+       ('Kiev', 'Odessa', '21.03.15', '21.03.16'),
+       ('Lviv', 'Odessa', '21.03.15', '21.03.16'),
+       ('Kiev', 'Odessa', '21.03.19', '21.03.20');
 
-INSERT INTO journey (station_from, station_to, departure, arrival)
-VALUES ('Kiev', 'Odessa', '20.06.2021', '21.06.2021');
-INSERT INTO journey (station_from, station_to, departure, arrival)
-VALUES ('Kiev', 'Odessa', '20.07.2021', '21.07.2021');
-INSERT INTO journey (station_from, station_to, departure, arrival)
-VALUES ('Kiev', 'Odessa', '20.08.2021', '21.08.2021');

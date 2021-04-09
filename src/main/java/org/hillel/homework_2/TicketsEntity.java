@@ -11,8 +11,8 @@ import java.time.LocalDate;
 @Setter
 @Getter
 @ToString
-@Table (name = "Homework_2")
-public class Homework_2 {
+@Table (name = "tickets")
+public class TicketsEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

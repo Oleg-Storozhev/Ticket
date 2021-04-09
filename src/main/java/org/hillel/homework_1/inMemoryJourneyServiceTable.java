@@ -27,7 +27,8 @@ public final class inMemoryJourneyServiceTable {
                     System.out.println("==================\nStation From: " + rs.getString(Const.TICKETS_STATION_FROM) + "\nStation To: " + rs.getString(Const.TICKETS_STATION_TO) + "\ndeparture: " + rs.getString(Const.TICKETS_DEPARTURE) + "\narrival: " + rs.getString(Const.TICKETS_ARRIVAL) + "\n==================");
                 }
             }
-        } catch(SQLException | ClassNotFoundException | NullPointerException e){
+        }
+        catch(SQLException | ClassNotFoundException | NullPointerException e){
             e.printStackTrace();
         }
     }

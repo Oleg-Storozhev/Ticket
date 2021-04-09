@@ -36,7 +36,8 @@ public class DatabaseConfig {
         config.setUsername(environment.getProperty("database.username"));
         config.setJdbcUrl(environment.getProperty("database.url"));
         config.addDataSourceProperty("database.name", environment.getProperty("database.url"));
-
+        config.setMinimumIdle(30);
+        config.setMaximumPoolSize(150);
         HikariDataSource dataSource = new HikariDataSource(config);
         return dataSource;
     }

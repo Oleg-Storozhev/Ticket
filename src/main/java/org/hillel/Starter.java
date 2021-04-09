@@ -41,12 +41,18 @@ public class Starter {
         inMemory.find("Kiev", "Lviv");
         inMemory.find("Kiev", "Odessa");
 
+
+        // --------------------------------------------------------------------------------------------------------
+
+        System.out.println("HomeWork_2");
+        final HibernateService HS = new HibernateService();
+
         // --------------------------------------------------------------------------------------------------------
 
         // FINISH IN 4 AND 5 VIDEO!
         System.out.println("Hibernate");
 
-        final JourneyEntity journeyEntity = new JourneyEntity();
+        JourneyEntity journeyEntity = new JourneyEntity();
         journeyEntity.setStationFrom("Kiev");
         journeyEntity.setStationTo("Lviv");
         journeyEntity.setDateFrom(Instant.now());
@@ -67,11 +73,7 @@ public class Starter {
         stopEntity.setCommonInfo(new CommonInfo());
         ticketClient.createStop(stopEntity);
 
-        System.out.println("create Journey with id = " + ticketClient.createJourney(journeyEntity));
+        System.out.println("create Journey with id = " + ticketClient.getjourneyById((journeyEntity.getId())));
 
-        // --------------------------------------------------------------------------------------------------------
-
-        System.out.println("HomeWork_2");
-        final HibernateService HS = new HibernateService();
     }
 }

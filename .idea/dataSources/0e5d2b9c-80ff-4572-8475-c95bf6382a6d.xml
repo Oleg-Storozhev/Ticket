@@ -1,8 +1,128 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataSource name="Tickets">
-  <database-model serializer="dbm" dbms="MYSQL" family-id="MYSQL" format-version="4.20">
+  <database-model serializer="dbm" dbms="MYSQL" family-id="MYSQL" format-version="4.21">
     <root id="1">
       <ServerVersion>8.0.18</ServerVersion>
+      <Grants>|root||admin|localhost|ALTER|G
+|root||root|localhost|ALTER|G
+|root||admin|localhost|ALTER ROUTINE|G
+|root||root|localhost|ALTER ROUTINE|G
+|root||admin|localhost|APPLICATION_PASSWORD_ADMIN|G
+|root||root|localhost|APPLICATION_PASSWORD_ADMIN|G
+|root||admin|localhost|AUDIT_ADMIN|G
+|root||root|localhost|AUDIT_ADMIN|G
+|root||admin|localhost|BACKUP_ADMIN|G
+|root||mysql.session|localhost|BACKUP_ADMIN|G
+|root||root|localhost|BACKUP_ADMIN|G
+|root||admin|localhost|BINLOG_ADMIN|G
+|root||root|localhost|BINLOG_ADMIN|G
+|root||admin|localhost|BINLOG_ENCRYPTION_ADMIN|G
+|root||root|localhost|BINLOG_ENCRYPTION_ADMIN|G
+|root||admin|localhost|CLONE_ADMIN|G
+|root||mysql.session|localhost|CLONE_ADMIN|G
+|root||root|localhost|CLONE_ADMIN|G
+|root||admin|localhost|CONNECTION_ADMIN|G
+|root||mysql.session|localhost|CONNECTION_ADMIN|G
+|root||root|localhost|CONNECTION_ADMIN|G
+|root||admin|localhost|CREATE|G
+|root||root|localhost|CREATE|G
+|root||admin|localhost|CREATE ROLE|G
+|root||root|localhost|CREATE ROLE|G
+|root||admin|localhost|CREATE ROUTINE|G
+|root||root|localhost|CREATE ROUTINE|G
+|root||admin|localhost|CREATE TABLESPACE|G
+|root||root|localhost|CREATE TABLESPACE|G
+|root||admin|localhost|CREATE TEMPORARY TABLES|G
+|root||root|localhost|CREATE TEMPORARY TABLES|G
+|root||admin|localhost|CREATE USER|G
+|root||root|localhost|CREATE USER|G
+|root||admin|localhost|CREATE VIEW|G
+|root||root|localhost|CREATE VIEW|G
+|root||admin|localhost|DELETE|G
+|root||root|localhost|DELETE|G
+|root||admin|localhost|DROP|G
+|root||root|localhost|DROP|G
+|root||admin|localhost|DROP ROLE|G
+|root||root|localhost|DROP ROLE|G
+|root||admin|localhost|ENCRYPTION_KEY_ADMIN|G
+|root||root|localhost|ENCRYPTION_KEY_ADMIN|G
+|root||admin|localhost|EVENT|G
+|root||root|localhost|EVENT|G
+|root||admin|localhost|EXECUTE|G
+|root||root|localhost|EXECUTE|G
+|root||admin|localhost|FILE|G
+|root||root|localhost|FILE|G
+|root||admin|localhost|GROUP_REPLICATION_ADMIN|G
+|root||root|localhost|GROUP_REPLICATION_ADMIN|G
+|root||admin|localhost|INDEX|G
+|root||root|localhost|INDEX|G
+|root||admin|localhost|INNODB_REDO_LOG_ARCHIVE|G
+|root||root|localhost|INNODB_REDO_LOG_ARCHIVE|G
+|root||admin|localhost|INSERT|G
+|root||root|localhost|INSERT|G
+|root||admin|localhost|LOCK TABLES|G
+|root||root|localhost|LOCK TABLES|G
+|root||admin|localhost|PERSIST_RO_VARIABLES_ADMIN|G
+|root||mysql.session|localhost|PERSIST_RO_VARIABLES_ADMIN|G
+|root||root|localhost|PERSIST_RO_VARIABLES_ADMIN|G
+|root||admin|localhost|PROCESS|G
+|root||root|localhost|PROCESS|G
+|root||admin|localhost|REFERENCES|G
+|root||root|localhost|REFERENCES|G
+|root||admin|localhost|RELOAD|G
+|root||root|localhost|RELOAD|G
+|root||admin|localhost|REPLICATION CLIENT|G
+|root||root|localhost|REPLICATION CLIENT|G
+|root||admin|localhost|REPLICATION SLAVE|G
+|root||root|localhost|REPLICATION SLAVE|G
+|root||admin|localhost|REPLICATION_APPLIER|G
+|root||root|localhost|REPLICATION_APPLIER|G
+|root||admin|localhost|REPLICATION_SLAVE_ADMIN|G
+|root||root|localhost|REPLICATION_SLAVE_ADMIN|G
+|root||admin|localhost|RESOURCE_GROUP_ADMIN|G
+|root||root|localhost|RESOURCE_GROUP_ADMIN|G
+|root||admin|localhost|RESOURCE_GROUP_USER|G
+|root||root|localhost|RESOURCE_GROUP_USER|G
+|root||admin|localhost|ROLE_ADMIN|G
+|root||root|localhost|ROLE_ADMIN|G
+|root||admin|localhost|SELECT|G
+|root||mysql.infoschema|localhost|SELECT|G
+|root||root|localhost|SELECT|G
+|root||admin|localhost|SERVICE_CONNECTION_ADMIN|G
+|root||root|localhost|SERVICE_CONNECTION_ADMIN|G
+|root||admin|localhost|SESSION_VARIABLES_ADMIN|G
+|root||mysql.session|localhost|SESSION_VARIABLES_ADMIN|G
+|root||root|localhost|SESSION_VARIABLES_ADMIN|G
+|root||admin|localhost|SET_USER_ID|G
+|root||root|localhost|SET_USER_ID|G
+|root||admin|localhost|SHOW DATABASES|G
+|root||root|localhost|SHOW DATABASES|G
+|root||admin|localhost|SHOW VIEW|G
+|root||root|localhost|SHOW VIEW|G
+|root||admin|localhost|SHUTDOWN|G
+|root||mysql.session|localhost|SHUTDOWN|G
+|root||root|localhost|SHUTDOWN|G
+|root||admin|localhost|SUPER|G
+|root||mysql.session|localhost|SUPER|G
+|root||root|localhost|SUPER|G
+|root||admin|localhost|SYSTEM_USER|G
+|root||mysql.session|localhost|SYSTEM_USER|G
+|root||root|localhost|SYSTEM_USER|G
+|root||admin|localhost|SYSTEM_VARIABLES_ADMIN|G
+|root||mysql.session|localhost|SYSTEM_VARIABLES_ADMIN|G
+|root||root|localhost|SYSTEM_VARIABLES_ADMIN|G
+|root||admin|localhost|TABLE_ENCRYPTION_ADMIN|G
+|root||root|localhost|TABLE_ENCRYPTION_ADMIN|G
+|root||admin|localhost|TRIGGER|G
+|root||root|localhost|TRIGGER|G
+|root||admin|localhost|UPDATE|G
+|root||root|localhost|UPDATE|G
+|root||admin|localhost|XA_RECOVER_ADMIN|G
+|root||root|localhost|XA_RECOVER_ADMIN|G
+|root||admin|localhost|grant option|G
+|root||root|localhost|grant option|G
+performance_schema|schema||mysql.session|localhost|SELECT|G
+sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <DefaultEngine>MyISAM</DefaultEngine>
       <DefaultTmpEngine>InnoDB</DefaultTmpEngine>
       <DefaultCasing>lower/lower</DefaultCasing>
@@ -891,34 +1011,21 @@
     </collation>
     <user id="282" parent="1" name="admin">
       <Host>localhost</Host>
-      <ObjectGrants>SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,RELOAD,SHUTDOWN,PROCESS,FILE,REFERENCES,INDEX,ALTER,SHOW DATABASES,SUPER,CREATE TEMPORARY TABLES,LOCK TABLES,EXECUTE,REPLICATION SLAVE,REPLICATION CLIENT,CREATE VIEW,SHOW VIEW,CREATE ROUTINE,ALTER ROUTINE,CREATE USER,EVENT,TRIGGER,CREATE TABLESPACE,CREATE ROLE,DROP ROLE!
-APPLICATION_PASSWORD_ADMIN,AUDIT_ADMIN,BACKUP_ADMIN,BINLOG_ADMIN,BINLOG_ENCRYPTION_ADMIN,CLONE_ADMIN,CONNECTION_ADMIN,ENCRYPTION_KEY_ADMIN,GROUP_REPLICATION_ADMIN,INNODB_REDO_LOG_ARCHIVE,PERSIST_RO_VARIABLES_ADMIN,REPLICATION_APPLIER,REPLICATION_SLAVE_ADMIN,RESOURCE_GROUP_ADMIN,RESOURCE_GROUP_USER,ROLE_ADMIN,SERVICE_CONNECTION_ADMIN,SESSION_VARIABLES_ADMIN,SET_USER_ID,SYSTEM_USER,SYSTEM_VARIABLES_ADMIN,TABLE_ENCRYPTION_ADMIN,XA_RECOVER_ADMIN!
-</ObjectGrants>
     </user>
     <user id="283" parent="1" name="mysql.infoschema">
       <Host>localhost</Host>
-      <ObjectGrants>SELECT
-</ObjectGrants>
+      <Plugin>caching_sha2_password</Plugin>
     </user>
     <user id="284" parent="1" name="mysql.session">
       <Host>localhost</Host>
-      <ObjectGrants>SHUTDOWN,SUPER
-BACKUP_ADMIN,CLONE_ADMIN,CONNECTION_ADMIN,PERSIST_RO_VARIABLES_ADMIN,SESSION_VARIABLES_ADMIN,SYSTEM_USER,SYSTEM_VARIABLES_ADMIN
-SELECT|performance_schema
-SELECT|mysql.user
-</ObjectGrants>
+      <Plugin>caching_sha2_password</Plugin>
     </user>
     <user id="285" parent="1" name="mysql.sys">
       <Host>localhost</Host>
-      <ObjectGrants>TRIGGER|sys
-SELECT|sys.sys_config
-</ObjectGrants>
+      <Plugin>caching_sha2_password</Plugin>
     </user>
     <user id="286" parent="1" name="root">
       <Host>localhost</Host>
-      <ObjectGrants>SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,RELOAD,SHUTDOWN,PROCESS,FILE,REFERENCES,INDEX,ALTER,SHOW DATABASES,SUPER,CREATE TEMPORARY TABLES,LOCK TABLES,EXECUTE,REPLICATION SLAVE,REPLICATION CLIENT,CREATE VIEW,SHOW VIEW,CREATE ROUTINE,ALTER ROUTINE,CREATE USER,EVENT,TRIGGER,CREATE TABLESPACE,CREATE ROLE,DROP ROLE!
-APPLICATION_PASSWORD_ADMIN,AUDIT_ADMIN,BACKUP_ADMIN,BINLOG_ADMIN,BINLOG_ENCRYPTION_ADMIN,CLONE_ADMIN,CONNECTION_ADMIN,ENCRYPTION_KEY_ADMIN,GROUP_REPLICATION_ADMIN,INNODB_REDO_LOG_ARCHIVE,PERSIST_RO_VARIABLES_ADMIN,REPLICATION_APPLIER,REPLICATION_SLAVE_ADMIN,RESOURCE_GROUP_ADMIN,RESOURCE_GROUP_USER,ROLE_ADMIN,SERVICE_CONNECTION_ADMIN,SESSION_VARIABLES_ADMIN,SET_USER_ID,SYSTEM_USER,SYSTEM_VARIABLES_ADMIN,TABLE_ENCRYPTION_ADMIN,XA_RECOVER_ADMIN!
-</ObjectGrants>
     </user>
   </database-model>
 </dataSource>

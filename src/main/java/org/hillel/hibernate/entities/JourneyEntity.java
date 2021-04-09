@@ -9,14 +9,27 @@ import lombok.ToString;
 import javax.persistence.*;
 import java.time.Instant;
 import java.util.Objects;
+import java.util.StringJoiner;
 
 @Entity
 @Table (name = "DBTickets")
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString
 public class JourneyEntity extends AbstractModifyEntity<Long> {
+
+    @Override
+    public int hashCode(){
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof JourneyEntity)) return false;
+        JourneyEntity entity = (JourneyEntity) o;
+        return getId() != null && Objects.equals(getId(),entity.getId());
+    }
 
     @Column(name = "station_from", length = 50, nullable = false, columnDefinition = "varchar(100) default 'NONE'")
     private String stationFrom;
@@ -42,4 +55,15 @@ public class JourneyEntity extends AbstractModifyEntity<Long> {
         this.vehicle = vehicle;
     }
 
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", JourneyEntity.class.getSimpleName() + "[", "]")
+                .add("stationFrom='"+ stationFrom + "'")
+                .add("stationTo='"+ stationTo + "'")
+                .add("dateFrom='"+ dateFrom + "'")
+                .add("dateTo='"+ dateTo + "'")
+                .add("direction='"+ direction + "'")
+                //.add("vehicle='"+ vehicle + "'")
+                .toString();
+    }
 }

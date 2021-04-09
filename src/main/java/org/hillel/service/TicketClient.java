@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.PostConstruct;
@@ -16,6 +17,7 @@ import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class TicketClient {
@@ -38,8 +40,14 @@ public class TicketClient {
     public TicketClient(){
     }
 
+
     public Long createJourney(final JourneyEntity journeyEntity){
         return journeyService.createJourney(journeyEntity);
+    }
+
+    public Optional<JourneyEntity> getjourneyById(Long id){
+//        Assert.notNull(id, "id must be a set");
+        return id == null? Optional.empty() : journeyService.getById(id);
     }
 
     public Long createStop(final StopEntity stopEntity){

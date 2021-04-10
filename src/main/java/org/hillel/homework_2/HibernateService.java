@@ -1,4 +1,3 @@
-
 package org.hillel.homework_2;
 
 import org.hillel.Journey;

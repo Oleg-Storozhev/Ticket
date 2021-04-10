@@ -29,7 +29,7 @@ public class Starter {
 
         System.out.println(journeyservice.find("Odessa", "Lviv", LocalDate.now(), LocalDate.now().plusDays(1)));
         System.out.println(journeyservice.find("Odessa", "Lviv", LocalDate.now().plusDays(1), LocalDate.now().plusDays(2)));
-       // ((ClassPathXmlApplicationContext) applicationContext).close();
+        // ((ClassPathXmlApplicationContext) applicationContext).close();
 
         // --------------------------------------------------------------------------------------------------------
 

@@ -10,6 +10,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.StringJoiner;
 
 @Entity
 @Table
@@ -30,4 +31,12 @@ public class VehicalEntity extends AbstractModifyEntity<Long> {
         journeys.add(journeyEntity);
         journeyEntity.addVechicle(this);
     }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", JourneyEntity.class.getSimpleName() + "[", "]")
+                .add("name='"+ name + "'")
+                .toString();
+    }
+
 }

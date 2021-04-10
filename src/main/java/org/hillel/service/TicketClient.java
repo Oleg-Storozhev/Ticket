@@ -1,6 +1,5 @@
 package org.hillel.service;
 
-
 import org.hillel.hibernate.entities.StopEntity;
 import org.hillel.hibernate.entities.JourneyEntity;
 import org.hillel.Journey;
@@ -44,6 +43,7 @@ public class TicketClient {
     public Long createJourney(final JourneyEntity journeyEntity){
         return journeyService.createJourney(journeyEntity);
     }
+
 
     public Optional<JourneyEntity> getjourneyById(Long id){
 //        Assert.notNull(id, "id must be a set");

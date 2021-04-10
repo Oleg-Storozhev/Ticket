@@ -47,7 +47,7 @@ public class JourneyEntity extends AbstractModifyEntity<Long> {
     @Enumerated(EnumType.STRING)
     private DirectionType direction = DirectionType.TO;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST})
+    @ManyToOne(cascade = {CascadeType.PERSIST}, fetch = FetchType.LAZY)
     @JoinColumn(name = "veh_id")
     private VehicalEntity vehicle;
 
@@ -63,7 +63,7 @@ public class JourneyEntity extends AbstractModifyEntity<Long> {
                 .add("dateFrom='"+ dateFrom + "'")
                 .add("dateTo='"+ dateTo + "'")
                 .add("direction='"+ direction + "'")
-                //.add("vehicle='"+ vehicle + "'")
+                .add("vehicle='"+ vehicle + "'")
                 .toString();
     }
 }

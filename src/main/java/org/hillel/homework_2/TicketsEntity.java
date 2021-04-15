@@ -18,10 +18,10 @@ public class TicketsEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "StatonFrom")
+    @Column(name = "StationFrom")
     private String StationFrom;
 
-    @Column(name = "StatonTo")
+    @Column(name = "StationTo")
     private String StationTo;
 
     @Column(name = "Arrival")

@@ -3,11 +3,11 @@ package org.hillel.service;
 import org.hillel.hibernate.entities.StopEntity;
 import org.hillel.hibernate.entities.JourneyEntity;
 import org.hillel.Journey;
+import org.hillel.hibernate.entities.VehicleEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
-import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.PostConstruct;
@@ -33,25 +33,22 @@ public class TicketClient {
     @Autowired
     private Environment environment;
 
+    @Autowired
+    private TransnationalVehicleService vehicleService;
+
     @Value("${datasource.url}")
     private String url;
 
     public TicketClient(){
     }
 
-
-    public Long createJourney(final JourneyEntity journeyEntity){
-        return journeyService.createJourney(journeyEntity);
-    }
-
-
-    public Optional<JourneyEntity> getjourneyById(Long id){
+    public Optional<JourneyEntity> getjourneyById(Long id, boolean withDependencies){
 //        Assert.notNull(id, "id must be a set");
-        return id == null? Optional.empty() : journeyService.getById(id);
+        return id == null? Optional.empty() : journeyService.findById(id, withDependencies);
     }
 
-    public Long createStop(final StopEntity stopEntity){
-        return stopService.create(stopEntity);
+    public StopEntity createOrUpdateStop(final StopEntity stopEntity){
+        return stopService.createOrUpdate(stopEntity);
     }
 
     public Collection<Journey> find(String stationFrom, String stationTo, LocalDate dateFrom, LocalDate dateTo) throws Exception {
@@ -80,5 +77,36 @@ public class TicketClient {
     @PreDestroy
     public void destroy(){
         System.out.println("destroy");
+    }
+
+    public JourneyEntity createOrUpdateJourney(JourneyEntity journey) {
+        return journeyService.createOrUpdateJourney(journey);
+    }
+
+    public VehicleEntity createOrUpdateVehicle(VehicleEntity vehicalEntity){
+        return vehicleService.createOrUpdate(vehicalEntity);
+    }
+
+    public void remove(JourneyEntity journeyEntity) {
+        journeyService.remove(journeyEntity);
+    }
+    public void removeById(Long ID) {
+        journeyService.removeByID(ID);
+    }
+
+    public void removeVehicle(final VehicleEntity vehicalEntity){
+        vehicleService.remove(vehicalEntity);
+    }
+
+    public Collection<VehicleEntity> findByids(Long ... ids){
+        return vehicleService.findByIds(ids);
+    }
+
+    public Optional<VehicleEntity> findVehicleById(Long id, boolean withDep){
+        return vehicleService.findById(id, withDep);
+    }
+
+    public Collection<VehicleEntity> findAllVehicles(){
+        return vehicleService.findAll();
     }
 }

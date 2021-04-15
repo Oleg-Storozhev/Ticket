@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -16,13 +17,49 @@ public class TransactionalJourneyService {
     private JourneyRepository journeyRepository;
 
     @Transactional
-    public Long createJourney(final JourneyEntity entity){
-        return journeyRepository.create(entity);
+    public JourneyEntity createOrUpdateJourney(final JourneyEntity entity1){
+        System.out.println("create journey ");
+        final JourneyEntity orUpdate = journeyRepository.createOrUpdate(entity1);
+        System.out.println("get journey by id");
+        JourneyEntity journey = journeyRepository.findByID(orUpdate.getId()).get();
+        journeyRepository.getEntitymanager().flush();
+        if(entity1.getId() == 1){
+            throw new IllegalArgumentException();
+        }
+        System.out.println("remove journey by id");
+        journeyRepository.removeById(journey.getId());
+
+        JourneyEntity entity2 = new JourneyEntity();
+        entity2.setDateFrom(orUpdate.getDateFrom());
+        entity2.setDateTo(orUpdate.getDateTo());
+        entity2.setStationFrom(orUpdate.getStationFrom());
+        entity2.setStationTo(orUpdate.getStationTo());
+        entity2.setActive(false);
+/*        boolean isNew = Objects.isNull(entity.getId());
+        if(!isNew){
+
+        }*/
+        return journeyRepository.createOrUpdate(entity2);
     }
 
     @Transactional(readOnly = true)
-    public Optional<JourneyEntity> getById(Long id) {
-        return journeyRepository.findById(id);
+    public Optional<JourneyEntity> findById(Long id, boolean withDepedencies) {
+        final Optional<JourneyEntity> byId = journeyRepository.findByID(id);
+        if(withDepedencies && byId.isPresent()){
+            final JourneyEntity journeyEntity = byId.get();
+            journeyEntity.getVehicle().getName();
+        }
+        return byId;
+    }
+
+
+    @Transactional
+    public void remove(JourneyEntity journeyEntity) {
+        journeyRepository.remove(journeyEntity);
+    }
+    @Transactional
+    public void removeByID(Long ID) {
+        journeyRepository.removeById(ID);
     }
 }
 

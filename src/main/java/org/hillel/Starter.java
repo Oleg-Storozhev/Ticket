@@ -3,81 +3,71 @@ import org.hillel.config.RootConfig;
 import org.hillel.hibernate.entities.JourneyEntity;
 import org.hillel.hibernate.entities.StopAddInfoEntity;
 import org.hillel.hibernate.entities.StopEntity;
-import org.hillel.hibernate.entities.VehicalEntity;
+import org.hillel.hibernate.entities.VehicleEntity;
 import org.hillel.hibernate.enums.DirectionType;
-import org.hillel.hibernate.util.CommonInfo;
-import org.hillel.homework_1.inMemoryJourneyServiceTable;
-import org.hillel.homework_2.Data;
-import org.hillel.homework_2.HibernateService;
-import org.hillel.service.JourneyService;
 import org.hillel.service.TicketClient;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.time.Instant;
-import java.time.LocalDate;
 
 public class Starter {
-    public static void main(String[] args) throws Exception {
-        // ASK!!!
+    public static void main(String[] args){
         System.out.println("Start");
-        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(RootConfig.class);
-        final JourneyService journeyservice = applicationContext.getBean("inMemoryJourneyService", JourneyService.class);
-        System.out.println(JourneyService.class);
-        System.out.println(TicketClient.class);
+        final ApplicationContext applicationContext = new AnnotationConfigApplicationContext(RootConfig.class);
         TicketClient ticketClient = applicationContext.getBean(TicketClient.class);
 
-        System.out.println(journeyservice.find("Odessa", "Lviv", LocalDate.now(), LocalDate.now().plusDays(1)));
-        System.out.println(journeyservice.find("Odessa", "Lviv", LocalDate.now().plusDays(1), LocalDate.now().plusDays(2)));
-        // ((ClassPathXmlApplicationContext) applicationContext).close();
+        VehicleEntity vehicleEntity = buildVehicle("bus1");
+        vehicleEntity = ticketClient.createOrUpdateVehicle(vehicleEntity);
+        JourneyEntity journeyEntity = buildJourney("from 1", "to 1", Instant.now(), Instant.now().plusSeconds(1000l));
+        vehicleEntity.setName("bus 2");
+        journeyEntity.addVechicle(vehicleEntity);
+        ticketClient.createOrUpdateJourney(journeyEntity);
 
-        // --------------------------------------------------------------------------------------------------------
+        System.out.println("delete vehicle");
+        ticketClient.removeVehicle(vehicleEntity);
 
-        System.out.println("HomeWork");
+        System.out.println(ticketClient.findVehicleById(1L, true));
+        System.out.println(ticketClient.findAllVehicles());
+        System.out.println(ticketClient.findByids(1L, 2L, 3L,4L,5L));
 
-        final inMemoryJourneyServiceTable inMemory = new inMemoryJourneyServiceTable();
-        inMemory.find("Odessa", "Lviv");
-        inMemory.find("Odessa", "Kiev");
-        inMemory.find("Kiev", "Lviv");
-        inMemory.find("Kiev", "Odessa");
+/*        ticketClient.removeById(journeyEntity.getId());
 
-        // --------------------------------------------------------------------------------------------------------
+        journeyEntity = ticketClient.createOrUpdateJourney(journeyEntity);
+        journeyEntity.addStop(buildStop(1D, 2D));
 
-        System.out.println("HomeWork2");
+        System.out.println("call create journey");
+        journeyEntity = ticketClient.createOrUpdateJourney(journeyEntity);
+        journeyEntity.getStops().get(0).setActive(false);
+        journeyEntity.addStop(buildStop(2D,3D));
+        System.out.println("call");
+        ticketClient.createOrUpdateJourney(journeyEntity);*/
 
-        final HibernateService HS = new HibernateService(new Data());
-        HS.find("Odessa", "Lviv", LocalDate.of(2021, 03,10), LocalDate.of(2021, 03,11));
-        HS.find("Odessa", "Kiev", LocalDate.of(2021, 03,10), LocalDate.of(2021, 03,11));
-        HS.find("Kiev", "Lviv", LocalDate.of(2021, 03,12), LocalDate.of(2021, 03,13));
-        HS.find("Kiev", "Odessa", LocalDate.of(2021, 03,15), LocalDate.of(2021, 03,16));
 
-        // --------------------------------------------------------------------------------------------------------
+    }
+    private static JourneyEntity buildJourney(final String from, final String to, final Instant dateFrom, final Instant dateTo){
+       final JourneyEntity journeyEntity = new JourneyEntity();
+       journeyEntity.setStationFrom(from);
+       journeyEntity.setStationTo(to);
+       journeyEntity.setDateFrom(dateFrom);
+       journeyEntity.setDateTo(dateTo);
+       journeyEntity.setDirection(DirectionType.TO);
+       journeyEntity.setActive(true);
+       return journeyEntity;
+    }
 
-        // FINISH IN 4 AND 5 VIDEO!
-        System.out.println("Hibernate");
-
-        JourneyEntity journeyEntity = new JourneyEntity();
-        journeyEntity.setStationFrom("Kiev");
-        journeyEntity.setStationTo("Lviv");
-        journeyEntity.setDateFrom(Instant.now());
-        journeyEntity.setDateTo(Instant.now().plusMillis(1000000L));
-        journeyEntity.setDirection(DirectionType.UNKNOWN);
-        journeyEntity.setActive(false);
-
-        final VehicalEntity vechicalEntity = new VehicalEntity();
-        vechicalEntity.setName("Bus_1");
-        journeyEntity.addVechicle(vechicalEntity);
-
-        ticketClient.createJourney(journeyEntity);
-
-        StopAddInfoEntity stopAddInfoEntity = new StopAddInfoEntity();
-        stopAddInfoEntity.setLatitude(11.0);
-        stopAddInfoEntity.setLongitude(1.3);
+    private static StopEntity buildStop(final Double lat, final Double lon){
+        final StopAddInfoEntity stopAddInfoEntity = new StopAddInfoEntity();
+        stopAddInfoEntity.setLatitude(lat);
+        stopAddInfoEntity.setLongitude(lon);
         StopEntity stopEntity = new StopEntity();
-        stopEntity.setCommonInfo(new CommonInfo());
-        ticketClient.createStop(stopEntity);
+        stopEntity.addAddInfo(stopAddInfoEntity);
+        return stopEntity;
+    }
 
-        System.out.println("create Journey with id = " + ticketClient.getjourneyById((journeyEntity.getId())));
-
+    private static VehicleEntity buildVehicle(final String name){
+        final VehicleEntity vehicleEntity = new VehicleEntity();
+        vehicleEntity.setName(name);
+        return vehicleEntity;
     }
 }

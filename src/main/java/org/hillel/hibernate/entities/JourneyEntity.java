@@ -1,21 +1,24 @@
 package org.hillel.hibernate.entities;
 
+import org.hibernate.annotations.DynamicUpdate;
 import org.hillel.hibernate.enums.DirectionType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 import javax.persistence.*;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.StringJoiner;
 
 @Entity
-@Table (name = "DBTickets")
+@Table (name = "journey", uniqueConstraints = @UniqueConstraint(name = "uniq_station_from_to", columnNames = {"station_from", "station_to"}))
 @Getter
 @Setter
 @NoArgsConstructor
+@DynamicUpdate
 public class JourneyEntity extends AbstractModifyEntity<Long> {
 
     @Override
@@ -47,12 +50,27 @@ public class JourneyEntity extends AbstractModifyEntity<Long> {
     @Enumerated(EnumType.STRING)
     private DirectionType direction = DirectionType.TO;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST}, fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "veh_id")
-    private VehicalEntity vehicle;
+    private VehicleEntity vehicle;
 
-    public void addVechicle(final VehicalEntity vehicle){
+    @ManyToMany(cascade = {CascadeType.PERSIST}, fetch = FetchType.LAZY)
+    @JoinTable(name = "journey_stop",
+            indexes = @Index(name = "journey_stop_idx", columnList = "journey_id, stop_id"),
+            joinColumns = @JoinColumn(name = "journey_id"),
+            inverseJoinColumns =  @JoinColumn(name = "stop_id")
+    )
+    private List<StopEntity> stops = new ArrayList<>();
+
+    public void addVechicle(final VehicleEntity vehicle){
         this.vehicle = vehicle;
+    }
+
+   public void addStop(StopEntity stop){
+        if(stop == null) return;
+        if (stops == null) stops = new ArrayList<>();
+        stops.add(stop);
+        stop.addJourney(this);
     }
 
     @Override

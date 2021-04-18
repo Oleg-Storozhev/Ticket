@@ -3,8 +3,6 @@ package org.hillel.hibernate.repository;
 import org.hillel.hibernate.entities.VehicleEntity;
 import org.springframework.stereotype.Repository;
 
-import java.util.Collection;
-
 @Repository
 public class VehicleRepository extends CommonRepository<VehicleEntity, Long> {
 

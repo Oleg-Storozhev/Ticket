@@ -17,6 +17,8 @@ public class Starter {
         final ApplicationContext applicationContext = new AnnotationConfigApplicationContext(RootConfig.class);
         TicketClient ticketClient = applicationContext.getBean(TicketClient.class);
 
+        System.out.println("after init");
+
         VehicleEntity vehicleEntity = buildVehicle("bus1");
         vehicleEntity = ticketClient.createOrUpdateVehicle(vehicleEntity);
         JourneyEntity journeyEntity = buildJourney("from 1", "to 1", Instant.now(), Instant.now().plusSeconds(1000l));

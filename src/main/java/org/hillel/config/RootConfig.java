@@ -12,8 +12,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
 @Configuration
-@ComponentScan({"org.hillel.context","org.hillel.config", "org.hillel.service", "org.hillel.hibernate"})
-@PropertySource("application.properties")
+@ComponentScan({"org.hillel"})
+@PropertySource({"classpath:application.properties"})
 public class RootConfig {
 
     @Bean

@@ -2,7 +2,6 @@ package org.hillel.config;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
-import org.postgresql.ds.PGSimpleDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,7 +20,7 @@ import java.io.InputStream;
 import java.util.Properties;
 
 @Configuration
-@PropertySource("database2.properties")
+@PropertySource("classpath:database.properties")
 @EnableTransactionManagement
 public class DatabaseConfig {
 
@@ -31,9 +30,8 @@ public class DatabaseConfig {
     @Bean
     public DataSource dataSource(){
         HikariConfig config = new HikariConfig();
-
-        config.setPassword(environment.getProperty("database.password"));
         config.setUsername(environment.getProperty("database.username"));
+        config.setPassword(environment.getProperty("database.password"));
         config.setJdbcUrl(environment.getProperty("database.url"));
         config.addDataSourceProperty("database.name", environment.getProperty("database.url"));
         config.setMinimumIdle(30);
@@ -65,6 +63,7 @@ public class DatabaseConfig {
             Properties properties = new Properties();
             InputStream is = getClass().getClassLoader().getResourceAsStream("hibernate.properties");
             properties.load(is);
+            System.out.println("Finished Getting Properties");
             return properties;
         } catch (IOException e){
             throw new IllegalArgumentException("Can't find 'hibernate.properties' in classpath!", e);

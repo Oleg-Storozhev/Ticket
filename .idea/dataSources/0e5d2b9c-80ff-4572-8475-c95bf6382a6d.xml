@@ -1027,44 +1027,149 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     <user id="286" parent="1" name="root">
       <Host>localhost</Host>
     </user>
-    <table id="287" parent="9" name="tickets"/>
-    <column id="288" parent="287" name="id">
+    <table id="287" parent="9" name="journey"/>
+    <table id="288" parent="9" name="stop_add_info"/>
+    <table id="289" parent="9" name="tickets"/>
+    <table id="290" parent="9" name="vehicleentity"/>
+    <column id="291" parent="287" name="id">
       <Position>1</Position>
       <DataType>bigint(20) unsigned|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="289" parent="287" name="stationFrom">
+    <column id="292" parent="287" name="stationFrom">
       <Position>2</Position>
-      <DataType>varchar(200)|0s</DataType>
+      <DataType>varchar(100)|0s</DataType>
       <NotNull>1</NotNull>
+      <DefaultExpression>&apos;NONE&apos;</DefaultExpression>
     </column>
-    <column id="290" parent="287" name="stationTo">
+    <column id="293" parent="287" name="stationTo">
       <Position>3</Position>
-      <DataType>varchar(200)|0s</DataType>
+      <DataType>varchar(100)|0s</DataType>
       <NotNull>1</NotNull>
+      <DefaultExpression>&apos;NONE&apos;</DefaultExpression>
     </column>
-    <column id="291" parent="287" name="departure">
+    <column id="294" parent="287" name="dateFrom">
       <Position>4</Position>
       <DataType>date|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="292" parent="287" name="arrival">
+    <column id="295" parent="287" name="dateTo">
       <Position>5</Position>
       <DataType>date|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="293" parent="287" name="id">
+    <column id="296" parent="287" name="direction">
+      <Position>6</Position>
+      <DataType>varchar(100)|0s</DataType>
+      <DefaultExpression>&apos;TO&apos;</DefaultExpression>
+    </column>
+    <index id="297" parent="287" name="id">
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Type>btree</Type>
     </index>
-    <key id="294" parent="287" name="PRIMARY">
+    <key id="298" parent="287" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="295" parent="287" name="id">
+    <key id="299" parent="287" name="id">
+      <ColNames>id</ColNames>
+      <UnderlyingIndexName>id</UnderlyingIndexName>
+    </key>
+    <column id="300" parent="288" name="id">
+      <Position>1</Position>
+      <DataType>bigint(20) unsigned|0s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>null</SequenceIdentity>
+    </column>
+    <column id="301" parent="288" name="longitude">
+      <Position>2</Position>
+      <DataType>double|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="302" parent="288" name="latitude">
+      <Position>3</Position>
+      <DataType>double|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="303" parent="288" name="id">
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+      <Type>btree</Type>
+    </index>
+    <key id="304" parent="288" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="305" parent="288" name="id">
+      <ColNames>id</ColNames>
+      <UnderlyingIndexName>id</UnderlyingIndexName>
+    </key>
+    <column id="306" parent="289" name="id">
+      <Position>1</Position>
+      <DataType>bigint(20) unsigned|0s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>null</SequenceIdentity>
+    </column>
+    <column id="307" parent="289" name="stationFrom">
+      <Position>2</Position>
+      <DataType>varchar(200)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="308" parent="289" name="stationTo">
+      <Position>3</Position>
+      <DataType>varchar(200)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="309" parent="289" name="departure">
+      <Position>4</Position>
+      <DataType>date|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="310" parent="289" name="arrival">
+      <Position>5</Position>
+      <DataType>date|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="311" parent="289" name="id">
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+      <Type>btree</Type>
+    </index>
+    <key id="312" parent="289" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="313" parent="289" name="id">
+      <ColNames>id</ColNames>
+      <UnderlyingIndexName>id</UnderlyingIndexName>
+    </key>
+    <column id="314" parent="290" name="id">
+      <Position>1</Position>
+      <DataType>bigint(20) unsigned|0s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>null</SequenceIdentity>
+    </column>
+    <column id="315" parent="290" name="name">
+      <Position>2</Position>
+      <DataType>varchar(200)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="316" parent="290" name="id">
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+      <Type>btree</Type>
+    </index>
+    <key id="317" parent="290" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="318" parent="290" name="id">
       <ColNames>id</ColNames>
       <UnderlyingIndexName>id</UnderlyingIndexName>
     </key>

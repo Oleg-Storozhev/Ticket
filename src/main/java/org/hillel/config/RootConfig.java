@@ -1,9 +1,9 @@
 package org.hillel.config;
 
+
 import org.hillel.homework_2.Data;
 import org.hillel.homework_2.HibernateService;
 import org.hillel.service.JourneyService;
-
 import org.hillel.service.StubJourneyService;
 import org.hillel.service.inMemoryJourneyService;
 import org.springframework.context.annotation.Bean;

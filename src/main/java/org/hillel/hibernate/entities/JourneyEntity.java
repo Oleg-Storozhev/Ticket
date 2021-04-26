@@ -14,7 +14,7 @@ import java.util.Objects;
 import java.util.StringJoiner;
 
 @Entity
-@Table (name = "journey", uniqueConstraints = @UniqueConstraint(name = "uniq_station_from_to", columnNames = {"station_from", "station_to"}))
+@Table (name = "journey", uniqueConstraints = @UniqueConstraint(name = "uniq_station_from_to", columnNames = {"stationFrom", "stationTo"}))
 @Getter
 @Setter
 @NoArgsConstructor
@@ -34,16 +34,16 @@ public class JourneyEntity extends AbstractModifyEntity<Long> {
         return getId() != null && Objects.equals(getId(),entity.getId());
     }
 
-    @Column(name = "station_from", length = 50, nullable = false, columnDefinition = "varchar(100) default 'NONE'")
+    @Column(name = "stationFrom", length = 50, nullable = false, columnDefinition = "varchar(100) default 'NONE'")
     private String stationFrom;
 
-    @Column(name = "station_to", length = 50, nullable = false, columnDefinition = "varchar(100) default 'NONE'")
+    @Column(name = "stationTo", length = 50, nullable = false, columnDefinition = "varchar(100) default 'NONE'")
     private String stationTo;
 
-    @Column(name = "date_from", nullable = false)
+    @Column(name = "dateFrom", nullable = false)
     private Instant dateFrom;
 
-    @Column(name = "date_to", nullable = false)
+    @Column(name = "dateTo", nullable = false)
     private Instant dateTo;
 
     @Column(name = "direction", length = 20)
@@ -51,7 +51,7 @@ public class JourneyEntity extends AbstractModifyEntity<Long> {
     private DirectionType direction = DirectionType.TO;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinColumn(name = "veh_id")
+    @JoinColumn(name = "vehId")
     private VehicleEntity vehicle;
 
     @ManyToMany(cascade = {CascadeType.PERSIST}, fetch = FetchType.LAZY)

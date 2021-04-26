@@ -16,7 +16,6 @@ import org.hibernate.annotations.NamedQuery;
 @Getter
 @Setter
 @NoArgsConstructor
-
 @NamedQueries(value = {
         @NamedQuery(name = "findAll", query = "from VehicleEntity")
 })

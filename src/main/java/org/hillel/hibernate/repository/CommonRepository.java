@@ -9,9 +9,7 @@ import org.springframework.util.Assert;
 import javax.persistence.EntityManager;
 import javax.persistence.ParameterMode;
 import javax.persistence.PersistenceContext;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
+import javax.persistence.criteria.*;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Objects;
@@ -64,6 +62,38 @@ public abstract class CommonRepository<E extends AbstractModifyEntity<ID>, ID ex
     @Override
     public final Collection<E> findByIds(ID... ids) {
         return entityManager.unwrap(Session.class).byMultipleIds(entityClass).multiLoad(ids);
+    }
+
+    @Override
+    public final Collection<E> findByName(String name) {
+        final  CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        final CriteriaQuery criteriaQuery = criteriaBuilder.createQuery(entityClass);
+        final Root <E> from = criteriaQuery.from(entityClass);
+        final Join<Object, Object> journeys = from.join("journeys", JoinType.LEFT);
+        final Predicate byJourneyName = criteriaBuilder.equal(journeys.get("StationFrom"), criteriaBuilder.parameter(String.class, "stationFromParam"));
+        journeys.on(byJourneyName);
+        final Predicate byName = criteriaBuilder.equal(from.get("name"), criteriaBuilder.parameter(String.class, "nameParam"));
+        final Predicate active = criteriaBuilder.equal(from.get("active"), criteriaBuilder.parameter(Boolean.class, "activeParam"));
+
+        return entityManager.createQuery(criteriaQuery.select(from).
+                where(byName, active))
+                .setParameter("nameParam", name)
+                .setParameter("activeParam", true)
+                .setParameter("stationFromParam", "from 1")
+                .getResultList();
+        /*return entityManager.createNativeQuery("select e.* from " + entityClass.getAnnotation(Table.class).name() + " e " + "e.name = ?", entityClass).setParameter(1, name)
+                .setParameter(1, name)
+                .getResultList();*/
+/*        return entityManager.createQuery("from " + entityClass.getName()
+                + " e where e.name = :entityName and e.active = :activeParam", entityClass)
+                .setParameter("entityName", name)
+                .setParameter("activeParam", true)
+                .getResultList();*/
+/*        return entityManager.createNativeQuery("select e.* from " + entityClass.getAnnotation(Table.class).name() + " e " + "where e.name = :entityName and e.active = :activeParam", entityClass)
+                .setParameter("entityName", name)
+                .setParameter("activeParam", "yes")
+                .getResultList();*/
+
     }
 
     @Override

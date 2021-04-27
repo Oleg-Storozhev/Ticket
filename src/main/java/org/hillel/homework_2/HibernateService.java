@@ -3,11 +3,6 @@ package org.hillel.homework_2;
 import org.hillel.Journey;
 import org.hillel.homework_1.Const;
 import org.hillel.service.JourneyService;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.sql.DataSource;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;

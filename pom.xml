@@ -32,7 +32,7 @@
                         </path>
                     </annotationProcessorPaths>
                     <compilerArguments>
-                        <processor>org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor.lombok.launch.AnnotationProcessorHider$AnnotationProcessor</processor>
+                        <processor>org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor,lombok.launch.AnnotationProcessorHider$AnnotationProcessor</processor>
                     </compilerArguments>
                 </configuration>
             </plugin>

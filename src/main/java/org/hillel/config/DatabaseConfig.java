@@ -2,6 +2,7 @@ package org.hillel.config;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import org.postgresql.ds.PGSimpleDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -34,6 +35,7 @@ public class DatabaseConfig {
         config.setPassword(environment.getProperty("database.password"));
         config.setJdbcUrl(environment.getProperty("database.url"));
         config.addDataSourceProperty("database.name", environment.getProperty("database.url"));
+        config.setDataSourceClassName(PGSimpleDataSource.class.getName());
         config.setMinimumIdle(30);
         config.setMaximumPoolSize(150);
         HikariDataSource dataSource = new HikariDataSource(config);

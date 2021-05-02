@@ -34,10 +34,10 @@ public class JourneyEntity extends AbstractModifyEntity<Long> {
         return getId() != null && Objects.equals(getId(),entity.getId());
     }
 
-    @Column(name = "stationFrom", length = 50, nullable = false, columnDefinition = "varchar(100) default 'NONE'")
+    @Column(name = "station_from", length = 50, nullable = false, columnDefinition = "varchar(100) default 'NONE'")
     private String stationFrom;
 
-    @Column(name = "stationTo", length = 50, nullable = false, columnDefinition = "varchar(100) default 'NONE'")
+    @Column(name = "station_to", length = 50, nullable = false, columnDefinition = "varchar(100) default 'NONE'")
     private String stationTo;
 
     @Column(name = "dateFrom", nullable = false)

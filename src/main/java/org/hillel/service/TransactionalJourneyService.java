@@ -33,10 +33,6 @@ public class TransactionalJourneyService {
         entity2.setStationFrom(orUpdate.getStationFrom());
         entity2.setStationTo(orUpdate.getStationTo());
         entity2.setActive(false);
-/*        boolean isNew = Objects.isNull(entity.getId());
-        if(!isNew){
-
-        }*/
         return journeyRepository.createOrUpdate(entity2);
     }
 

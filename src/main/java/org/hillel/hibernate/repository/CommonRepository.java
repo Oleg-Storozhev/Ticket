@@ -4,6 +4,7 @@ import lombok.SneakyThrows;
 import org.hibernate.Session;
 import org.hibernate.annotations.Table;
 import org.hillel.hibernate.entities.AbstractModifyEntity;
+import org.springframework.stereotype.Repository;
 import org.springframework.util.Assert;
 
 import javax.persistence.EntityManager;
@@ -15,7 +16,7 @@ import java.util.Collection;
 import java.util.Objects;
 import java.util.Optional;
 
-
+@Repository
 public abstract class CommonRepository<E extends AbstractModifyEntity<ID>, ID extends Serializable> implements GenericRepository<E, ID> {
 
     @PersistenceContext
@@ -65,7 +66,7 @@ public abstract class CommonRepository<E extends AbstractModifyEntity<ID>, ID ex
     }
 
     @Override
-    public final Collection<E> findByName(String name) {
+    public Collection<E> findByName(String name) {
         final  CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         final CriteriaQuery criteriaQuery = criteriaBuilder.createQuery(entityClass);
         final Root <E> from = criteriaQuery.from(entityClass);

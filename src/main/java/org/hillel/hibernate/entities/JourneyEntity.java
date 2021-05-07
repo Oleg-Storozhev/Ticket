@@ -66,7 +66,7 @@ public class JourneyEntity extends AbstractModifyEntity<Long> {
         this.vehicle = vehicle;
     }
 
-   public void addStop(StopEntity stop){
+    public void addStop(StopEntity stop){
         if(stop == null) return;
         if (stops == null) stops = new ArrayList<>();
         stops.add(stop);

@@ -4,14 +4,18 @@ import org.hillel.hibernate.entities.VehicleEntity;
 import org.hillel.hibernate.repository.VehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionTemplate;
 
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceContext;
 import java.util.Collection;
 import java.util.Optional;
 
 @Service
-public class TransnationalVehicleService {
+public class NewTransnationalVehicleService {
 
     @Autowired
     private VehicleRepository vehicleRepository;
@@ -21,7 +25,7 @@ public class TransnationalVehicleService {
         return vehicleRepository.createOrUpdate(vehicleEntity);
     }
 
-    @Transactional
+    @Transactional(propagation = Propagation.NEVER)
     public void remove(VehicleEntity vehicalEntity){
         vehicleRepository.remove(vehicalEntity);
     }
@@ -43,21 +47,8 @@ public class TransnationalVehicleService {
         return byID;
     }
 
-    @Autowired
-    private NewTransnationalVehicleService newTransnationalVehicleService;
-
     @Transactional(readOnly = true)
     public Collection<VehicleEntity> findAll(){
         return vehicleRepository.findAll();
-    }
-
-    @Transactional
-    public Collection<VehicleEntity> findAllByName(String name){
-        final Collection<VehicleEntity> byName = vehicleRepository.findByName(name);
-        final VehicleEntity next = byName.iterator().next();
-        next.setName(String.valueOf(System.currentTimeMillis()));
-        System.out.println("Save vehicle with id =" + next.getId() + "and new value "+ next.getName());
-        newTransnationalVehicleService.createOrUpdate(next);
-        return byName;
     }
 }

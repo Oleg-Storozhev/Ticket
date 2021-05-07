@@ -46,7 +46,8 @@ public class VehicleEntity extends AbstractModifyEntity<Long> {
     @Override
     public String toString() {
         return new StringJoiner(", ", JourneyEntity.class.getSimpleName() + "[", "]")
-                .add("name='"+ name + "'")
+                .add("id='"+ getId() + "'")
+                .add("name='" + name +"'")
                 .toString();
     }
 

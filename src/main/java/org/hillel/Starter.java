@@ -48,14 +48,14 @@ public class Starter {
 
     }
     private static JourneyEntity buildJourney(final String from, final String to, final Instant dateFrom, final Instant dateTo){
-       final JourneyEntity journeyEntity = new JourneyEntity();
-       journeyEntity.setStationFrom(from);
-       journeyEntity.setStationTo(to);
-       journeyEntity.setDateFrom(dateFrom);
-       journeyEntity.setDateTo(dateTo);
-       journeyEntity.setDirection(DirectionType.TO);
-       journeyEntity.setActive(true);
-       return journeyEntity;
+        final JourneyEntity journeyEntity = new JourneyEntity();
+        journeyEntity.setStationFrom(from);
+        journeyEntity.setStationTo(to);
+        journeyEntity.setDateFrom(dateFrom);
+        journeyEntity.setDateTo(dateTo);
+        journeyEntity.setDirection(DirectionType.TO);
+        journeyEntity.setActive(true);
+        return journeyEntity;
     }
 
     private static StopEntity buildStop(final Double lat, final Double lon){

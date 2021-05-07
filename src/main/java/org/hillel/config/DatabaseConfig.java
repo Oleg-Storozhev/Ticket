@@ -13,6 +13,7 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.transaction.support.TransactionTemplate;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
@@ -34,7 +35,7 @@ public class DatabaseConfig {
         config.setUsername(environment.getProperty("database.username"));
         config.setPassword(environment.getProperty("database.password"));
         config.setJdbcUrl(environment.getProperty("database.url"));
-        config.addDataSourceProperty("database.name", environment.getProperty("database.url"));
+        config.addDataSourceProperty("databaseName", environment.getProperty("database.name"));
         config.setDataSourceClassName(PGSimpleDataSource.class.getName());
         config.setMinimumIdle(30);
         config.setMaximumPoolSize(150);
@@ -45,7 +46,7 @@ public class DatabaseConfig {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() throws IOException {
         LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
         emf.setDataSource(dataSource());
-        emf.setPackagesToScan("org.hillel.hibernate");
+        emf.setPackagesToScan("hibernate.properties");
         emf.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
         emf.setJpaProperties(getHibernateProperties());
         return emf;
@@ -55,8 +56,13 @@ public class DatabaseConfig {
         JpaTransactionManager jpaTransactionManager = new JpaTransactionManager();
         jpaTransactionManager.setEntityManagerFactory(entityManagerFactory);
         jpaTransactionManager.setDataSource(dataSource());
-        System.out.println("Finished getting Properties");
+        System.out.println("Finished with transactionManager");
         return jpaTransactionManager;
+    }
+
+    @Bean
+    public TransactionTemplate transactionTemplate(final PlatformTransactionManager platformTransactionManager){
+        return new TransactionTemplate(platformTransactionManager);
     }
 
     public Properties getHibernateProperties() throws IOException {

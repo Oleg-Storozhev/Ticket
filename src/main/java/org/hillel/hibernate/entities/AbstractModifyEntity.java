@@ -3,9 +3,8 @@ package org.hillel.hibernate.entities;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.Type;
 import org.hillel.hibernate.util.YesNoConventer;
-
+import org.springframework.data.domain.Persistable;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -14,11 +13,11 @@ import java.time.Instant;
 @Getter
 @Setter
 @MappedSuperclass
-public abstract class AbstractModifyEntity<ID extends Serializable> {
+public abstract class AbstractModifyEntity<D extends Serializable> implements Persistable<D> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private ID id;
+    private D id;
 
     @Column(name = "create_date")
     @CreationTimestamp
@@ -27,5 +26,10 @@ public abstract class AbstractModifyEntity<ID extends Serializable> {
     @Column(name = "active")
     @Convert(converter = YesNoConventer.class)
     private boolean active = true;
+
+    @Override
+    public boolean isNew(){
+        return id == null;
+    }
 
 }

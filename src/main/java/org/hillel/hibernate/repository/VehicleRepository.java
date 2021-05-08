@@ -1,12 +1,8 @@
 package org.hillel.hibernate.repository;
 
-import org.hillel.hibernate.entities.JourneyEntity;
-import org.hillel.hibernate.entities.JourneyEntity_;
 import org.hillel.hibernate.entities.VehicleEntity;
-import org.hillel.hibernate.entities.VehicleEntity_;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.criteria.*;
 import java.util.Collection;
 
 @Repository

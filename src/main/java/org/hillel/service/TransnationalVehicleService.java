@@ -13,27 +13,21 @@ import java.util.Optional;
 @Service
 public class TransnationalVehicleService {
 
-/*    @Autowired
-    private VehicleRepository vehicleRepository;*/
-
     @Autowired
     private VehicleJpaRepository vehicleRepository;
 
     @Transactional()
     public VehicleEntity createOrUpdate(VehicleEntity vehicleEntity){
-        // return vehicleRepository.createOrUpdate(vehicleEntity);
         return vehicleRepository.save(vehicleEntity);
     }
 
     @Transactional
     public void remove(VehicleEntity vehicalEntity){
-        //vehicleRepository.remove(vehicalEntity);
         vehicleRepository.delete(vehicalEntity);
     }
 
     @Transactional
     public Collection<VehicleEntity> findByIds(Long ... ids){
-        //return vehicleRepository.findByIds(ids);
         return (Collection<VehicleEntity>) vehicleRepository.findAllById(Arrays.asList(ids));
     }
 
@@ -61,11 +55,6 @@ public class TransnationalVehicleService {
     @Transactional
     public Collection<VehicleEntity> findAllByName(String name){
         final Collection<VehicleEntity> byName = vehicleRepository.findByName(name);
-        /*final VehicleEntity next = byName.iterator().next();
-        next.setName(String.valueOf(System.currentTimeMillis()));
-        System.out.println("Save vehicle with id =" + next.getId() + "and new value "+ next.getName());
-        newTransnationalVehicleService.createOrUpdate(next);*/
-
         return byName;
     }
 }

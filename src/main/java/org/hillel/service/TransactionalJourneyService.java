@@ -16,25 +16,7 @@ public class TransactionalJourneyService {
 
     @Transactional
     public JourneyEntity createOrUpdateJourney(final JourneyEntity entity1){
-        System.out.println("create journey ");
-        final JourneyEntity orUpdate = journeyRepository.save(entity1);
-        System.out.println("get journey by id");
-        JourneyEntity journey = journeyRepository.findById(orUpdate.getId()).get();
-        journeyRepository.getEntitymanager().flush();
-        if(entity1.getId() == 1){
-            throw new IllegalArgumentException();
-        }
-        System.out.println("remove journey by id");
-        assert journey.getId() != null;
-        journeyRepository.deleteById(journey.getId());
-
-        JourneyEntity entity2 = new JourneyEntity();
-        entity2.setDateFrom(orUpdate.getDateFrom());
-        entity2.setDateTo(orUpdate.getDateTo());
-        entity2.setStationFrom(orUpdate.getStationFrom());
-        entity2.setStationTo(orUpdate.getStationTo());
-        entity2.setActive(false);
-        return journeyRepository.save(entity2);
+        return journeyRepository.save(entity1);
     }
 
     @Transactional(readOnly = true)

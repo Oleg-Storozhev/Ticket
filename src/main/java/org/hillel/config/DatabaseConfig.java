@@ -46,7 +46,7 @@ public class DatabaseConfig {
         return dataSource;
     }
     @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory() throws IOException {
+    public LocalContainerEntityManagerFactoryBean emf() throws IOException {
         LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
         emf.setDataSource(dataSource());
         emf.setPackagesToScan("hibernate.properties");

@@ -3,7 +3,6 @@ package org.hillel.hibernate.entities;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hillel.hibernate.util.CommonInfo;
 
@@ -36,7 +35,6 @@ public class StopEntity extends AbstractModifyEntity<Long> {
 
     public void addJourney(JourneyEntity journeyEntity) {
         if(journeyEntity == null) return;
-        // todo ask
         ArrayList<JourneyEntity> journeys = new ArrayList<>();
 
         if(journeys == null) journeys = new ArrayList<>();

@@ -17,4 +17,12 @@ public class TransactionalStopService {
     public StopEntity createOrUpdate(StopEntity stopEntity){
         return stopRepository.createOrUpdate(stopEntity);
     }
+
+    public void remove(StopEntity stopEntity){
+        stopRepository.remove(stopEntity);
+    }
+
+    public void removeByID(Long ID) {
+        stopRepository.removeById(ID);
+    }
 }

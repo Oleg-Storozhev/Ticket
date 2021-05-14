@@ -14,7 +14,7 @@ import java.util.Objects;
 import java.util.StringJoiner;
 
 @Entity
-@Table (name = "journey", uniqueConstraints = @UniqueConstraint(name = "uniq_station_from_to", columnNames = {"stationFrom", "stationTo"}))
+@Table (name = "journey", uniqueConstraints = @UniqueConstraint(name = "uniq_station_from_to", columnNames = {"departure", "arrival"}))
 @Getter
 @Setter
 @NoArgsConstructor
@@ -40,10 +40,10 @@ public class JourneyEntity extends AbstractModifyEntity<Long> {
     @Column(name = "station_to", length = 50, nullable = false, columnDefinition = "varchar(100) default 'NONE'")
     private String stationTo;
 
-    @Column(name = "dateFrom", nullable = false)
+    @Column(name = "departure", nullable = false)
     private Instant dateFrom;
 
-    @Column(name = "dateTo", nullable = false)
+    @Column(name = "arrival", nullable = false)
     private Instant dateTo;
 
     @Column(name = "direction", length = 20)

@@ -98,6 +98,10 @@ public class TicketClient {
         vehicleService.remove(vehicalEntity);
     }
 
+    public void removeVehicleByID(Long ID) {
+        vehicleService.removeByID(ID);
+    }
+
     public Collection<VehicleEntity> findByids(Long ... ids){
         return vehicleService.findByIds(ids);
     }
@@ -109,4 +113,13 @@ public class TicketClient {
     public Collection<VehicleEntity> findAllVehicles(){
         return vehicleService.findAll();
     }
+
+    public void removeVehicleStop(StopEntity stopEntity){
+        stopService.remove(stopEntity);
+    }
+
+    public void removeVehicleStopByID(Long ID) {
+        stopService.removeByID(ID);
+    }
+
 }

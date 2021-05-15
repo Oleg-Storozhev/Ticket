@@ -18,7 +18,6 @@ import org.springframework.transaction.support.TransactionTemplate;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Properties;
 
 @Configuration

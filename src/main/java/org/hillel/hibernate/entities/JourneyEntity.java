@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.StringJoiner;
+import org.hibernate.annotations.NamedQueries;
+import org.hibernate.annotations.NamedQuery;
 
 @Entity
 @Table (name = "journey", uniqueConstraints = @UniqueConstraint(name = "uniq_station_from_to", columnNames = {"departure", "arrival"}))
@@ -19,6 +21,18 @@ import java.util.StringJoiner;
 @Setter
 @NoArgsConstructor
 @DynamicUpdate
+@NamedQueries(value = {
+        @NamedQuery(name = "findAllJourneys",
+                query = "from JourneyEntity ")
+})
+@NamedStoredProcedureQueries(value = {
+        @NamedStoredProcedureQuery(
+                name = "findAllJourneys",
+                procedureName = "find_all_journeys",
+                parameters = @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, type = Class.class),
+                resultClasses = JourneyEntity.class
+        )
+})
 public class JourneyEntity extends AbstractModifyEntity<Long> {
 
     @Override

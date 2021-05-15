@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collection;
 import java.util.Optional;
 
 @Service
@@ -20,7 +21,7 @@ public class TransactionalJourneyService {
         final JourneyEntity orUpdate = journeyRepository.createOrUpdate(entity1);
         System.out.println("get journey by id");
         JourneyEntity journey = journeyRepository.findByID(orUpdate.getId()).get();
-        journeyRepository.getEntitymanager().flush();
+        journeyRepository.getEntityManager().flush();
         if(entity1.getId() == 1){
             throw new IllegalArgumentException();
         }
@@ -54,6 +55,27 @@ public class TransactionalJourneyService {
     @Transactional
     public void removeByID(Long ID) {
         journeyRepository.removeById(ID);
+    }
+
+    @Transactional
+    public Collection<JourneyEntity> findAll() {
+        return journeyRepository.findAll();
+    }
+    @Transactional
+    public Collection<JourneyEntity> findAllAsNatie() {
+        return journeyRepository.findAllAsNative();
+    }
+    @Transactional
+    public Collection<JourneyEntity> findAllVehiclesAsNamed() {
+        return journeyRepository.findAllAsNamed();
+    }
+    @Transactional
+    public Collection<JourneyEntity> findAllVehiclesAsCriteria() {
+        return journeyRepository.findAllAsCriteria();
+    }
+    @Transactional
+    public Collection<JourneyEntity> findAllVehiclesAsStoredProcedure() {
+        return journeyRepository.findAllAsStoredProcedure();
     }
 }
 

@@ -35,6 +35,25 @@ public class Starter {
         ticketClient.removeVehicleStop(stopEntity);
         ticketClient.removeVehicleStopByID(0L);
 
+        System.out.println("HW 5");
+        System.out.println(ticketClient.findAllVehicles());
+        System.out.println(ticketClient.findAllVehiclesAsNative());
+        System.out.println(ticketClient.findAllVehiclesAsNamed());
+        System.out.println(ticketClient.findAllVehiclesAsCriteria());
+        System.out.println(ticketClient.findAllVehiclesAsStoredProcedure());
+
+        System.out.println(ticketClient.findAllStops());
+        System.out.println(ticketClient.findAllStopsAsNative());
+        System.out.println(ticketClient.findAllStopsAsNamed());
+        System.out.println(ticketClient.findAllStopsAsCriteria());
+        System.out.println(ticketClient.findAllStopsAsStoredProcedure());
+
+        System.out.println(ticketClient.findAllJourneys());
+        System.out.println(ticketClient.findAllJourneysAsNative());
+        System.out.println(ticketClient.findAllJourneysAsNamed());
+        System.out.println(ticketClient.findAllJourneysAsCriteria());
+        System.out.println(ticketClient.findAllJourneysAsStoredProcedure());
+
         System.out.println(ticketClient.findVehicleById(1L, true));
         System.out.println(ticketClient.findAllVehicles());
         System.out.println(ticketClient.findByids(1L, 2L, 3L,4L,5L));

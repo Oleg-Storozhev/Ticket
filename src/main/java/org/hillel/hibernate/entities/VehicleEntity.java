@@ -17,12 +17,13 @@ import org.hibernate.annotations.NamedQuery;
 @Setter
 @NoArgsConstructor
 @NamedQueries(value = {
-        @NamedQuery(name = "findAll", query = "from VehicleEntity")
+        @NamedQuery(name = "findAllVehicles",
+                query = "from VehicleEntity")
 })
 
 @NamedStoredProcedureQueries(value = {
         @NamedStoredProcedureQuery(
-                name = "findAllVehicle",
+                name = "findAllVehicles",
                 procedureName = "find_all_vehicles",
                 parameters = @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, type = Class.class),
                 resultClasses = VehicleEntity.class

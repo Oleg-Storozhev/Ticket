@@ -8,6 +8,8 @@ import org.hillel.hibernate.util.CommonInfo;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import org.hibernate.annotations.NamedQueries;
+import org.hibernate.annotations.NamedQuery;
 
 @Entity
 @Table(name = "stop")
@@ -15,6 +17,18 @@ import java.util.ArrayList;
 @Setter
 @NoArgsConstructor
 @DynamicUpdate
+@NamedQueries(value = {
+        @NamedQuery(name = "findAllStops",
+                query = "from StopEntity")
+})
+@NamedStoredProcedureQueries(value = {
+        @NamedStoredProcedureQuery(
+                name = "findAllStops",
+                procedureName = "find_all_stops",
+                parameters = @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, type = Class.class),
+                resultClasses = StopEntity.class
+        )
+})
 public class StopEntity extends AbstractModifyEntity<Long> {
 
     @Embedded

@@ -46,11 +46,6 @@ public class TransnationalVehicleService {
     @Autowired
     private NewTransnationalVehicleService newTransnationalVehicleService;
 
-    @Transactional(readOnly = true)
-    public Collection<VehicleEntity> findAll(){
-        return vehicleRepository.findAll();
-    }
-
     @Transactional
     public Collection<VehicleEntity> findAllByName(String name){
         final Collection<VehicleEntity> byName = vehicleRepository.findByName(name);
@@ -63,5 +58,26 @@ public class TransnationalVehicleService {
 
     public void removeByID(Long id) {
         vehicleRepository.removeById(id);
+    }
+
+    @Transactional(readOnly = true)
+    public Collection<VehicleEntity> findAll(){
+        return vehicleRepository.findAll();
+    }
+    @Transactional
+    public Collection<VehicleEntity> findAllAsNatie() {
+       return vehicleRepository.findAllAsNative();
+    }
+    @Transactional
+    public Collection<VehicleEntity> findAllVehiclesAsNamed() {
+        return vehicleRepository.findAllAsNamed();
+    }
+    @Transactional
+    public Collection<VehicleEntity> findAllVehiclesAsCriteria() {
+        return vehicleRepository.findAllAsCriteria();
+    }
+    @Transactional
+    public Collection<VehicleEntity> findAllVehiclesAsStoredProcedure() {
+        return vehicleRepository.findAllAsStoredProcedure();
     }
 }

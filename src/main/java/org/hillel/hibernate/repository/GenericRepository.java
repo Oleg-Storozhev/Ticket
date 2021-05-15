@@ -17,4 +17,12 @@ public interface GenericRepository<E, ID> {
     Collection<E> findByName(String name);
 
     Collection<E> findAll();
+
+    Collection<E> findAllAsNative();
+
+    Collection<E> findAllAsCriteria();
+
+    Collection<E> findAllAsStoredProcedure();
+
+    Collection<E> findAllAsNamed();
 }

@@ -109,10 +109,55 @@ public class TicketClient {
     public Optional<VehicleEntity> findVehicleById(Long id, boolean withDep){
         return vehicleService.findById(id, withDep);
     }
-
+    // FIND VEHICLES
     public Collection<VehicleEntity> findAllVehicles(){
         return vehicleService.findAll();
     }
+    public Collection<VehicleEntity> findAllVehiclesAsNative(){
+        return vehicleService.findAllAsNatie();
+    }
+    public Collection<VehicleEntity> findAllVehiclesAsNamed(){
+        return vehicleService.findAllVehiclesAsNamed();
+    }
+    public Collection<VehicleEntity> findAllVehiclesAsCriteria(){
+        return vehicleService.findAllVehiclesAsCriteria();
+    }
+    public Collection<VehicleEntity> findAllVehiclesAsStoredProcedure(){
+        return vehicleService.findAllVehiclesAsStoredProcedure();
+    }
+    // FIND STOPS
+    public Collection<StopEntity> findAllStops(){
+        return stopService.findAll();
+    }
+    public Collection<StopEntity> findAllStopsAsNative(){
+        return stopService.findAllAsNatie();
+    }
+    public Collection<StopEntity> findAllStopsAsNamed(){
+        return stopService.findAllVehiclesAsNamed();
+    }
+    public Collection<StopEntity> findAllStopsAsCriteria(){
+        return stopService.findAllVehiclesAsCriteria();
+    }
+    public Collection<StopEntity> findAllStopsAsStoredProcedure(){
+        return stopService.findAllVehiclesAsStoredProcedure();
+    }
+    // FIND Journeys
+    public Collection<JourneyEntity> findAllJourneys(){
+        return journeyService.findAll();
+    }
+    public Collection<JourneyEntity> findAllJourneysAsNative(){
+        return journeyService.findAllAsNatie();
+    }
+    public Collection<JourneyEntity> findAllJourneysAsNamed(){
+        return journeyService.findAllVehiclesAsNamed();
+    }
+    public Collection<JourneyEntity> findAllJourneysAsCriteria(){
+        return journeyService.findAllVehiclesAsCriteria();
+    }
+    public Collection<JourneyEntity> findAllJourneysAsStoredProcedure(){
+        return journeyService.findAllVehiclesAsStoredProcedure();
+    }
+
 
     public void removeVehicleStop(StopEntity stopEntity){
         stopService.remove(stopEntity);

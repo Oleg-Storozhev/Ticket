@@ -97,7 +97,7 @@ public abstract class CommonRepository<E extends AbstractModifyEntity<ID>, ID ex
 
     @Override
     public Collection<E> findAllAsNamed() {
-        return entityManager.createNamedQuery("findAll").getResultList();
+        return entityManager.createNamedQuery("findAllVehicles").getResultList();
     }
 
     @Override
@@ -113,11 +113,15 @@ public abstract class CommonRepository<E extends AbstractModifyEntity<ID>, ID ex
         return entityManager.createStoredProcedureQuery("find_all", entityClass)
                 .registerStoredProcedureParameter(1, Class.class, ParameterMode.REF_CURSOR)
                 .registerStoredProcedureParameter(2, String.class, ParameterMode.IN)
-                .setParameter(2,entityClass.getAnnotation(Table.class))
+                .setParameter(2, entityClass.getAnnotation(Table.class))
                 .getResultList();
     }
 
     public Collection<E> findAllSortedByID(){
-        return entityManager.createQuery("from "+ entityClass.getSimpleName() + " order by id", entityClass).getResultList();
+        return entityManager
+                .createQuery("from "+ entityClass.getSimpleName() + " order by id", entityClass)
+                .setFirstResult(0)
+                .setMaxResults(10)
+                .getResultList();
     }
 }

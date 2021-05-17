@@ -78,6 +78,10 @@ public class JourneyRepository extends CommonRepository<JourneyEntity,Long>{
 
 
     public Collection<JourneyEntity> findAllSortedByID() {
-        return entityManager.createQuery("select v from JourneyEntity v order by v.id").getResultList();
+        return entityManager
+                .createQuery("select v from JourneyEntity v order by v.id")
+                .setFirstResult(0)
+                .setMaxResults(10)
+                .getResultList();
     }
 }

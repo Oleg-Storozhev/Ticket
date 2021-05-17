@@ -53,6 +53,9 @@ public class StopRepository extends CommonRepository<StopEntity, Long> {
 
 
     public Collection<StopEntity> findAllSortedByID() {
-        return entityManager.createQuery("select v from StopEntity v order by v.id").getResultList();
+        return entityManager
+                .createQuery("select v from StopEntity v order by v.id").setFirstResult(0)
+                .setMaxResults(10)
+                .getResultList();
     }
 }

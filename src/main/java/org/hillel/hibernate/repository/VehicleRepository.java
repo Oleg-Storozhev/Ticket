@@ -28,12 +28,12 @@ public class VehicleRepository extends CommonRepository<VehicleEntity, Long> {
 
     @Override
     public Collection<VehicleEntity> findAll() {
-        return entityManager.createQuery("from "+ VehicleEntity.class.getSimpleName(), VehicleEntity.class).getResultList();
+        return entityManager.createQuery("select v from VehicleEntity v").getResultList();
     }
 
     @Override
     public Collection<VehicleEntity> findAllAsNative(){
-        return entityManager.createNativeQuery("select * from " + VehicleEntity.class.getAnnotation(Table.class).getClass().getName(), VehicleEntity.class).getResultList();
+        return entityManager.createNativeQuery("select * from vehicleentity").getResultList();
     }
 
     @Override
@@ -68,6 +68,10 @@ public class VehicleRepository extends CommonRepository<VehicleEntity, Long> {
     }
 
     public Collection<VehicleEntity> findAllSortedByID() {
-        return entityManager.createQuery("select v from VehicleEntity v order by v.id").getResultList();
+        return entityManager
+                .createQuery("select v from VehicleEntity v order by v.id")
+                .setFirstResult(0)
+                .setMaxResults(10)
+                .getResultList();
     }
 }

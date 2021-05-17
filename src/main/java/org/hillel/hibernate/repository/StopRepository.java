@@ -20,12 +20,12 @@ public class StopRepository extends CommonRepository<StopEntity, Long> {
     }
     @Override
     public Collection<StopEntity> findAll() {
-        return entityManager.createQuery("from "+ StopEntity.class.getSimpleName(), StopEntity.class).getResultList();
+        return entityManager.createQuery("select v from StopEntity v").getResultList();
     }
 
     @Override
     public Collection<StopEntity> findAllAsNative(){
-        return entityManager.createNativeQuery("select * from " + StopEntity.class.getAnnotation(Table.class).getClass().getName(), StopEntity.class).getResultList();
+        return entityManager.createNativeQuery("select * from stop_add_info").getResultList();
     }
 
     @Override

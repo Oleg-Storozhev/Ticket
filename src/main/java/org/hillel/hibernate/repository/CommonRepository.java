@@ -97,7 +97,7 @@ public abstract class CommonRepository<E extends AbstractModifyEntity<ID>, ID ex
 
     @Override
     public Collection<E> findAllAsNamed() {
-        return entityManager.createNamedQuery("findAll").getResultList();
+        return entityManager.createNamedQuery("findAllVehicles").getResultList();
     }
 
     @Override

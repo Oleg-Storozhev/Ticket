@@ -1,4 +1,5 @@
 package org.hillel;
+
 import org.hillel.config.RootConfig;
 import org.hillel.hibernate.entities.JourneyEntity;
 import org.hillel.hibernate.entities.StopAddInfoEntity;
@@ -97,4 +98,5 @@ public class Starter {
         vehicleEntity.setName(name);
         return vehicleEntity;
     }
+
 }

@@ -3,15 +3,10 @@ package org.hillel.service;
 import org.hillel.hibernate.entities.VehicleEntity;
 import org.hillel.hibernate.repository.VehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
@@ -87,15 +82,7 @@ public class TransnationalVehicleService {
         return vehicleRepository.findAllAsStoredProcedure();
     }
 
-    public List<VehicleEntity> getAllEmployees(Integer pageNo, Integer pageSize, String sortBy) {
-        Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
-
-        Page<VehicleEntity> pagedResult = vehicleRepository.findAll(paging);
-
-        if(pagedResult.hasContent()) {
-            return pagedResult.getContent();
-        } else {
-            return new ArrayList<VehicleEntity>();
-        }
+    public Collection<VehicleEntity> getAllVehiclesSortedByID() {
+        return (List<VehicleEntity>) vehicleRepository.findAllSortedByID();
     }
 }

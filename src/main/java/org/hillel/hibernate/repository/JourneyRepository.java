@@ -46,12 +46,12 @@ public class JourneyRepository extends CommonRepository<JourneyEntity,Long>{
 
     @Override
     public Collection<JourneyEntity> findAll() {
-        return entityManager.createQuery("from "+ JourneyEntity.class.getSimpleName(), JourneyEntity.class).getResultList();
+        return entityManager.createQuery("select v from JourneyEntity v").getResultList();
     }
 
     @Override
     public Collection<JourneyEntity> findAllAsNative(){
-        return entityManager.createNativeQuery("select * from " + JourneyEntity.class.getAnnotation(Table.class).getClass().getName(), JourneyEntity.class).getResultList();
+        return entityManager.createNativeQuery("select * from journey").getResultList();
     }
 
     @Override
@@ -77,4 +77,7 @@ public class JourneyRepository extends CommonRepository<JourneyEntity,Long>{
     }
 
 
+    public Collection<JourneyEntity> findAllSortedByID() {
+        return entityManager.createQuery("select v from JourneyEntity v order by v.id").getResultList();
+    }
 }

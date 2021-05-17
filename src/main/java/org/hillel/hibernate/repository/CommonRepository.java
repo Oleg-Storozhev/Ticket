@@ -117,4 +117,7 @@ public abstract class CommonRepository<E extends AbstractModifyEntity<ID>, ID ex
                 .getResultList();
     }
 
+    public Collection<E> findAllSortedByID(){
+        return entityManager.createQuery("from "+ entityClass.getSimpleName() + " order by id", entityClass).getResultList();
+    }
 }

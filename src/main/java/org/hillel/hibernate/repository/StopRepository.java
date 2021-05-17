@@ -1,6 +1,7 @@
 package org.hillel.hibernate.repository;
 
 import org.hibernate.annotations.Table;
+import org.hillel.hibernate.entities.JourneyEntity;
 import org.hillel.hibernate.entities.StopEntity;
 import org.hillel.hibernate.entities.VehicleEntity;
 import org.springframework.stereotype.Repository;
@@ -51,4 +52,7 @@ public class StopRepository extends CommonRepository<StopEntity, Long> {
     }
 
 
+    public Collection<StopEntity> findAllSortedByID() {
+        return entityManager.createQuery("select v from StopEntity v order by v.id").getResultList();
+    }
 }

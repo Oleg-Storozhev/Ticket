@@ -1,12 +1,13 @@
 package org.hillel.service;
 
 import org.hillel.hibernate.entities.StopEntity;
-import org.hillel.hibernate.entities.VehicleEntity;
 import org.hillel.hibernate.repository.StopRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.util.Collection;
+import java.util.List;
 
 @Service
 public class TransactionalStopService {
@@ -46,5 +47,9 @@ public class TransactionalStopService {
     @Transactional
     public Collection<StopEntity> findAllVehiclesAsStoredProcedure() {
         return stopRepository.findAllAsStoredProcedure();
+    }
+
+    public Collection<StopEntity> getAllStopsSortedByID() {
+        return stopRepository.findAllSortedByID();
     }
 }

@@ -3,7 +3,7 @@ package org.hillel.hibernate.repository;
 import java.util.Collection;
 import java.util.Optional;
 
-public interface GenericRepository<E, ID> {
+public interface GenericRepository<E, ID>{
     E createOrUpdate(E entity);
 
     Optional<E> findByID(ID id);

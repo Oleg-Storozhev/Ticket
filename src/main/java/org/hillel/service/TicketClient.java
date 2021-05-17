@@ -1,23 +1,22 @@
 package org.hillel.service;
 
-import org.hillel.hibernate.entities.StopEntity;
-import org.hillel.hibernate.entities.JourneyEntity;
 import org.hillel.Journey;
+import org.hillel.hibernate.entities.JourneyEntity;
+import org.hillel.hibernate.entities.StopEntity;
 import org.hillel.hibernate.entities.VehicleEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import java.time.LocalDate;
-import java.util.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 
 @Component
 public class TicketClient {
@@ -168,16 +167,16 @@ public class TicketClient {
         stopService.removeByID(ID);
     }
 
-    public List<VehicleEntity> getAllVehicles(Integer pageNo, Integer pageSize, String sortBy) {
-        return vehicleService.getAllVehicles(pageNo, pageSize, sortBy);
+    public Collection<VehicleEntity> getAllVehiclesSortedByID(String sortBy) {
+        return vehicleService.getAllVehiclesSortedByID();
     }
 
-    public List<StopEntity> getAllStops(Integer pageNo, Integer pageSize, String sortBy) {
-        return stopService.getAllStops(pageNo, pageSize, sortBy);
+    public Collection<StopEntity> getAllStopsSortedByID() {
+        return stopService.getAllStopsSortedByID();
     }
 
-    public List<JourneyEntity> getAllJourneys(Integer pageNo, Integer pageSize, String sortBy) {
-        return journeyService.getAllJourneys(pageNo, pageSize, sortBy);
+    public Collection<JourneyEntity> getAllJourneysSortedByID() {
+        return journeyService.getAllJourneysSortedByID();
     }
 
 }

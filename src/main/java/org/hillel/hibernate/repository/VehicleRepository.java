@@ -1,6 +1,7 @@
 package org.hillel.hibernate.repository;
 
 import org.hibernate.annotations.Table;
+import org.hillel.hibernate.entities.StopEntity;
 import org.hillel.hibernate.entities.VehicleEntity;
 import org.springframework.stereotype.Repository;
 
@@ -66,4 +67,7 @@ public class VehicleRepository extends CommonRepository<VehicleEntity, Long> {
             .getResultList();
     }
 
+    public Collection<VehicleEntity> findAllSortedByID() {
+        return entityManager.createQuery("select v from VehicleEntity v order by v.id").getResultList();
+    }
 }

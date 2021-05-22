@@ -1,6 +1,5 @@
 package org.hillel.service;
 
-import org.hillel.hibernate.entities.JourneyEntity;
 import org.hillel.hibernate.entities.VehicleEntity;
 import org.hillel.hibernate.repository.VehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +8,6 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -83,14 +81,15 @@ public class TransnationalVehicleService {
         return vehicleRepository.findAllAsStoredProcedure();
     }
 
+    @Transactional
     public Collection<VehicleEntity> getAllVehiclesSortedByID(int start, int max) {
         return vehicleRepository.findAllSortedByID(start, max);
     }
-
+    @Transactional
     public Collection<VehicleEntity> getAllVehiclesSortedByName(int start, int max) {
         return vehicleRepository.findAllSortedByName(start, max);
     }
-
+    @Transactional
     public Collection<VehicleEntity> getAllVehiclesSortedByActive(int start, int max) {
         return vehicleRepository.findAllSortedByActive(start, max);
     }

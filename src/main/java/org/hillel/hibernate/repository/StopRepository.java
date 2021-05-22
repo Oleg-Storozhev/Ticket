@@ -19,7 +19,7 @@ public class StopRepository extends CommonRepository<StopEntity, Long> {
         super(StopEntity.class);
         this.entityClass = entityClass;
     }
-    @Override
+/*    @Override
     public Collection<StopEntity> findAll() {
         return entityManager.createQuery("from "+ StopEntity.class.getSimpleName(), StopEntity.class).getResultList();
     }
@@ -49,14 +49,14 @@ public class StopRepository extends CommonRepository<StopEntity, Long> {
                 .registerStoredProcedureParameter(2, String.class, ParameterMode.IN)
                 .setParameter(2,StopEntity.class.getAnnotation(Table.class))
                 .getResultList();
-    }
+    }*/
 
 
-    public Collection<StopEntity> findAllSortedByID(int start, int max) {
+/*    public Collection<StopEntity> findAllSortedByID(int start, int max) {
         return entityManager
                 .createQuery("select v from StopEntity v order by v.id")
                 .setFirstResult(start)
                 .setMaxResults(max)
                 .getResultList();
-    }
+    }*/
 }

@@ -26,7 +26,7 @@ public class VehicleRepository extends CommonRepository<VehicleEntity, Long> {
         super.remove(entity);
     }
 
-    @Override
+/*    @Override
     public Collection<VehicleEntity> findAll() {
         return entityManager.createQuery("select v from VehicleEntity v").getResultList();
     }
@@ -65,15 +65,15 @@ public class VehicleRepository extends CommonRepository<VehicleEntity, Long> {
             .setFirstResult(1)
             .setMaxResults(3)
             .getResultList();
-    }
+    }*/
 
-    public Collection<VehicleEntity> findAllSortedByID(int start, int max) {
+/*    public Collection<VehicleEntity> findAllSortedByID(int start, int max) {
         return entityManager
                 .createQuery("select v from VehicleEntity v order by v.id")
                 .setFirstResult(start)
                 .setMaxResults(max)
                 .getResultList();
-    }
+    }*/
     public Collection<VehicleEntity> findAllSortedByName(int start, int max){
         return entityManager
                 .createQuery("select v from VehicleEntity v order by v.name")

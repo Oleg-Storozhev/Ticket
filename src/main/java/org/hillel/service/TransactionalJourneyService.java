@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -79,10 +78,11 @@ public class TransactionalJourneyService {
         return journeyRepository.findAllAsStoredProcedure();
     }
 
+    @Transactional
     public Collection<JourneyEntity> getAllJourneysSortedByID(int start, int max) {
         return journeyRepository.findAllSortedByID(start, max);
     }
-
+    @Transactional
     public Collection<JourneyEntity> getAllJourneysSortedByActive(int start, int max) {
         return journeyRepository.findAllSortedByActive(start, max);
     }

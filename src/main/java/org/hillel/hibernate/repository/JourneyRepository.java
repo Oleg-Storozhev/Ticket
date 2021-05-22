@@ -44,7 +44,7 @@ public class JourneyRepository extends CommonRepository<JourneyEntity,Long>{
         return entityManager;
     }
 
-    @Override
+/*    @Override
     public Collection<JourneyEntity> findAll() {
         return entityManager.createQuery("select v from JourneyEntity v").getResultList();
     }
@@ -74,14 +74,14 @@ public class JourneyRepository extends CommonRepository<JourneyEntity,Long>{
                 .registerStoredProcedureParameter(2, String.class, ParameterMode.IN)
                 .setParameter(2,JourneyEntity.class.getAnnotation(Table.class))
                 .getResultList();
-    }
+    }*/
 
 
-    public Collection<JourneyEntity> findAllSortedByID(int start, int max) {
+/*    public Collection<JourneyEntity> findAllSortedByID(int start, int max) {
         return entityManager
                 .createQuery("select v from JourneyEntity v order by v.id")
                 .setFirstResult(start)
                 .setMaxResults(max)
                 .getResultList();
-    }
+    }*/
 }

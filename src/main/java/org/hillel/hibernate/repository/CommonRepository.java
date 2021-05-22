@@ -4,6 +4,7 @@ import lombok.SneakyThrows;
 import org.hibernate.Session;
 import org.hibernate.annotations.Table;
 import org.hillel.hibernate.entities.AbstractModifyEntity;
+import org.hillel.hibernate.entities.JourneyEntity;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.Assert;
 
@@ -13,6 +14,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.*;
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -82,36 +84,53 @@ public abstract class CommonRepository<E extends AbstractModifyEntity<ID>, ID ex
                 .setParameter("activeParam", true)
                 .setParameter("stationFromParam", "from 1")
                 .getResultList();
-        /*return entityManager.createNativeQuery("select e.* from " + entityClass.getAnnotation(Table.class).name() + " e " + "e.name = ?", entityClass).setParameter(1, name)
-                .setParameter(1, name)
-                .getResultList();*/
-/*        return entityManager.createQuery("from " + entityClass.getName()
-                + " e where e.name = :entityName and e.active = :activeParam", entityClass)
-                .setParameter("entityName", name)
-                .setParameter("activeParam", true)
-                .getResultList();*/
-/*        return entityManager.createNativeQuery("select e.* from " + entityClass.getAnnotation(Table.class).name() + " e " + "where e.name = :entityName and e.active = :activeParam", entityClass)
-                .setParameter("entityName", name)
-                .setParameter("activeParam", "yes")
-                .getResultList();*/
-
     }
 
     @Override
     public Collection<E> findAll() {
-        //return entityManager.createNativeQuery("select * from " + entityClass.getAnnotation(Table.class).name(), entityClass).getResultList();
-        //return entityManager.createQuery("from "+ entityClass.getSimpleName(), entityClass).getResultList();
+        return entityManager.createQuery("from "+ entityClass.getSimpleName(), entityClass).getResultList();
+    }
 
-/*        final CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+    @Override
+    public Collection<E> findAllAsNative(){
+        return entityManager.createNativeQuery("select * from " + entityClass.getAnnotation(Table.class).getClass().getName(), entityClass).getResultList();
+    }
+
+    @Override
+    public Collection<E> findAllAsNamed() {
+        return entityManager.createNamedQuery("findAllVehicles").getResultList();
+    }
+
+    @Override
+    public Collection<E> findAllAsCriteria(){
+        final CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         final CriteriaQuery<E> query = criteriaBuilder.createQuery(entityClass);
         final Root<E> from = query.from(entityClass);
+        return entityManager.createQuery(query.select(from)).getResultList();
+    }
 
-        return entityManager.createQuery(query.select(from)).getResultList();*/
+    @Override
+    public Collection<E> findAllAsStoredProcedure() {
         return entityManager.createStoredProcedureQuery("find_all", entityClass)
                 .registerStoredProcedureParameter(1, Class.class, ParameterMode.REF_CURSOR)
                 .registerStoredProcedureParameter(2, String.class, ParameterMode.IN)
-                .setParameter(2,entityClass.getAnnotation(Table.class))
+                .setParameter(2, entityClass.getAnnotation(Table.class))
                 .getResultList();
     }
 
+    public Collection<E> findAllSortedByID(int start, int max){
+        return entityManager
+                .createQuery("from "+ entityClass.getSimpleName() + " order by id", entityClass)
+                .setFirstResult(start)
+                .setMaxResults(max)
+                .getResultList();
+    }
+
+    public Collection<E> findAllSortedByActive(int start, int max) {
+        return entityManager
+                .createQuery("from " + entityClass.getSimpleName() + " order by active", entityClass)
+                .setFirstResult(start)
+                .setMaxResults(max)
+                .getResultList();
+    }
 }

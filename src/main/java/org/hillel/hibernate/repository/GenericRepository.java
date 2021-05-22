@@ -3,7 +3,7 @@ package org.hillel.hibernate.repository;
 import java.util.Collection;
 import java.util.Optional;
 
-public interface GenericRepository<E, ID> {
+public interface GenericRepository<E, ID>{
     E createOrUpdate(E entity);
 
     Optional<E> findByID(ID id);
@@ -17,4 +17,12 @@ public interface GenericRepository<E, ID> {
     Collection<E> findByName(String name);
 
     Collection<E> findAll();
+
+    Collection<E> findAllAsNative();
+
+    Collection<E> findAllAsCriteria();
+
+    Collection<E> findAllAsStoredProcedure();
+
+    Collection<E> findAllAsNamed();
 }

@@ -1,4 +1,5 @@
 package org.hillel;
+
 import org.hillel.config.RootConfig;
 import org.hillel.hibernate.entities.JourneyEntity;
 import org.hillel.hibernate.entities.StopAddInfoEntity;
@@ -28,12 +29,47 @@ public class Starter {
 
         System.out.println("delete vehicle");
         ticketClient.removeVehicle(vehicleEntity);
+        ticketClient.removeVehicleByID(0L);
+
+        System.out.println("delete stop");
+        StopEntity stopEntity = buildStop(12.0, 13.0);
+        ticketClient.removeVehicleStop(stopEntity);
+        ticketClient.removeVehicleStopByID(0L);
+
+        System.out.println("HW 5");
+        System.out.println(ticketClient.findAllVehicles());
+        System.out.println(ticketClient.findAllVehiclesAsNative());
+        System.out.println(ticketClient.findAllVehiclesAsNamed());
+        System.out.println(ticketClient.findAllVehiclesAsCriteria());
+        System.out.println(ticketClient.findAllVehiclesAsStoredProcedure());
+
+        System.out.println(ticketClient.findAllStops());
+        System.out.println(ticketClient.findAllStopsAsNative());
+        System.out.println(ticketClient.findAllStopsAsNamed());
+        System.out.println(ticketClient.findAllStopsAsCriteria());
+        System.out.println(ticketClient.findAllStopsAsStoredProcedure());
+
+        System.out.println(ticketClient.findAllJourneys());
+        System.out.println(ticketClient.findAllJourneysAsNative());
+        System.out.println(ticketClient.findAllJourneysAsNamed());
+        System.out.println(ticketClient.findAllJourneysAsCriteria());
+        System.out.println(ticketClient.findAllJourneysAsStoredProcedure());
 
         System.out.println(ticketClient.findVehicleById(1L, true));
         System.out.println(ticketClient.findAllVehicles());
         System.out.println(ticketClient.findByids(1L, 2L, 3L,4L,5L));
 
-/*        ticketClient.removeById(journeyEntity.getId());
+        System.out.println("HW 6");
+        System.out.println(ticketClient.getAllJourneysSortedByID(0,10));
+        System.out.println(ticketClient.getAllStopsSortedByID(0,10));
+        System.out.println(ticketClient.getAllVehiclesSortedByID(0,10));
+        System.out.println(ticketClient.getAllVehicleSortedByName(0,10));
+        System.out.println(ticketClient.getAllVehiclesSortedByActive(0,10));
+        System.out.println(ticketClient.getAllJourneysSortedByActive(0,10));
+        System.out.println(ticketClient.getAllStopsortedByActive(0,10));
+
+
+        ticketClient.removeById(journeyEntity.getId());
 
         journeyEntity = ticketClient.createOrUpdateJourney(journeyEntity);
         journeyEntity.addStop(buildStop(1D, 2D));
@@ -43,7 +79,7 @@ public class Starter {
         journeyEntity.getStops().get(0).setActive(false);
         journeyEntity.addStop(buildStop(2D,3D));
         System.out.println("call");
-        ticketClient.createOrUpdateJourney(journeyEntity);*/
+        ticketClient.createOrUpdateJourney(journeyEntity);
 
 
     }
@@ -72,4 +108,5 @@ public class Starter {
         vehicleEntity.setName(name);
         return vehicleEntity;
     }
+
 }

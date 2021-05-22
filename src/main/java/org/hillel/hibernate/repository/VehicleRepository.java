@@ -1,19 +1,22 @@
 package org.hillel.hibernate.repository;
 
-import org.hillel.hibernate.entities.JourneyEntity;
-import org.hillel.hibernate.entities.JourneyEntity_;
+import org.hibernate.annotations.Table;
+import org.hillel.hibernate.entities.StopEntity;
 import org.hillel.hibernate.entities.VehicleEntity;
-import org.hillel.hibernate.entities.VehicleEntity_;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.criteria.*;
+import javax.persistence.ParameterMode;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.Collection;
 
 @Repository
 public class VehicleRepository extends CommonRepository<VehicleEntity, Long> {
-
-    protected VehicleRepository(){
+    private final Class<VehicleEntity> entityClass;
+    protected VehicleRepository(Class<VehicleEntity> entityClass){
         super(VehicleEntity.class);
+        this.entityClass = entityClass;
     }
 
     @Override
@@ -24,45 +27,66 @@ public class VehicleRepository extends CommonRepository<VehicleEntity, Long> {
     }
 
 /*    @Override
-    public Collection <VehicleEntity> findByName(String name){
-        return entityManager.createQuery("from VehicleEntity e where e.name ");
-    }*/
-@Override
-public Collection<VehicleEntity> findByName(String name) {
-/*        final CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        final CriteriaQuery criteriaQuery = criteriaBuilder.createQuery(VehicleEntity.class);
-        final Root<VehicleEntity> from = criteriaQuery.from(VehicleEntity.class);
-        final Join<Object, Object> journeys = from.join(VehicleEntity_.JOURNEYS, JoinType.LEFT);
-        final Predicate byJourneyName = criteriaBuilder.equal(journeys.get(JourneyEntity_.STATION_FROM), criteriaBuilder.parameter(String.class, "stationFromParam"));
-        journeys.on(byJourneyName);
-        final Predicate byName = criteriaBuilder.equal(from.get(VehicleEntity_.NAME), criteriaBuilder.parameter(String.class, "nameParam"));
-        final Predicate active = criteriaBuilder.equal(from.get(VehicleEntity_.ACTIVE), criteriaBuilder.parameter(Boolean.class, "activeParam"));
+    public Collection<VehicleEntity> findAll() {
+        return entityManager.createQuery("select v from VehicleEntity v").getResultList();
+    }
 
-        return entityManager.createQuery(criteriaQuery.select(from).
-            where(byName, active))
-            .setParameter("nameParam", name)
-            .setParameter("activeParam", true)
-            .setParameter("stationFromParam", "from 1")
-            .getResultList();
-        */
+    @Override
+    public Collection<VehicleEntity> findAllAsNative(){
+        return entityManager.createNativeQuery("select * from vehicleentity").getResultList();
+    }
+
+    @Override
+    public Collection<VehicleEntity> findAllAsNamed() {
+        return entityManager.createNamedQuery("findAllVehicles").getResultList();
+    }
+
+    @Override
+    public Collection<VehicleEntity> findAllAsCriteria() {
+        final CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        final CriteriaQuery<VehicleEntity> query = criteriaBuilder.createQuery(VehicleEntity.class);
+        final Root<VehicleEntity> from = query.from(VehicleEntity.class);
+        return entityManager.createQuery(query.select(from)).getResultList();
+    }
+
+    @Override
+    public Collection<VehicleEntity> findAllAsStoredProcedure() {
+        return entityManager.createStoredProcedureQuery("findAllVehicles", VehicleEntity.class)
+                .registerStoredProcedureParameter(1, Class.class, ParameterMode.REF_CURSOR)
+                .registerStoredProcedureParameter(2, String.class, ParameterMode.IN)
+                .setParameter(2,VehicleEntity.class.getAnnotation(Table.class))
+                .getResultList();
+    }
+
+    @Override
+    public Collection<VehicleEntity> findByName(String name) {
     return entityManager
             .createQuery("select v from VehicleEntity v left join v.journeys js on js.vehicle.id = v.id")
             .setFirstResult(1)
             .setMaxResults(3)
             .getResultList();
-    /*return entityManager.createNativeQuery("select e.* from " + entityClass.getAnnotation(Table.class).name() + " e " + "e.name = ?", entityClass).setParameter(1, name)
-                .setParameter(1, name)
-                .getResultList();*/
-/*        return entityManager.createQuery("from " + entityClass.getName()
-                + " e where e.name = :entityName and e.active = :activeParam", entityClass)
-                .setParameter("entityName", name)
-                .setParameter("activeParam", true)
-                .getResultList();*/
-/*        return entityManager.createNativeQuery("select e.* from " + entityClass.getAnnotation(Table.class).name() + " e " + "where e.name = :entityName and e.active = :activeParam", entityClass)
-                .setParameter("entityName", name)
-                .setParameter("activeParam", "yes")
-                .getResultList();*/
+    }*/
 
-}
+/*    public Collection<VehicleEntity> findAllSortedByID(int start, int max) {
+        return entityManager
+                .createQuery("select v from VehicleEntity v order by v.id")
+                .setFirstResult(start)
+                .setMaxResults(max)
+                .getResultList();
+    }*/
+    public Collection<VehicleEntity> findAllSortedByName(int start, int max){
+        return entityManager
+                .createQuery("select v from VehicleEntity v order by v.name")
+                .setFirstResult(start)
+                .setMaxResults(max)
+                .getResultList();
+    }
 
+    public Collection<VehicleEntity> findAllSortedByActive(int start, int max) {
+        return entityManager
+                .createQuery("select v from VehicleEntity v order by v.active")
+                .setFirstResult(start)
+                .setMaxResults(max)
+                .getResultList();
+    }
 }

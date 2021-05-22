@@ -1,8 +1,8 @@
 package org.hillel.service;
 
-import org.hillel.hibernate.entities.StopEntity;
-import org.hillel.hibernate.entities.JourneyEntity;
 import org.hillel.Journey;
+import org.hillel.hibernate.entities.JourneyEntity;
+import org.hillel.hibernate.entities.StopEntity;
 import org.hillel.hibernate.entities.VehicleEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -98,6 +98,10 @@ public class TicketClient {
         vehicleService.remove(vehicalEntity);
     }
 
+    public void removeVehicleByID(Long ID) {
+        vehicleService.removeByID(ID);
+    }
+
     public Collection<VehicleEntity> findByids(Long ... ids){
         return vehicleService.findByIds(ids);
     }
@@ -105,8 +109,87 @@ public class TicketClient {
     public Optional<VehicleEntity> findVehicleById(Long id, boolean withDep){
         return vehicleService.findById(id, withDep);
     }
-
+    // FIND VEHICLES
     public Collection<VehicleEntity> findAllVehicles(){
         return vehicleService.findAll();
+    }
+    public Collection<VehicleEntity> findAllVehiclesAsNative(){
+        return vehicleService.findAllAsNatie();
+    }
+    public Collection<VehicleEntity> findAllVehiclesAsNamed(){
+        return vehicleService.findAllVehiclesAsNamed();
+    }
+    public Collection<VehicleEntity> findAllVehiclesAsCriteria(){
+        return vehicleService.findAllVehiclesAsCriteria();
+    }
+    public Collection<VehicleEntity> findAllVehiclesAsStoredProcedure(){
+        return vehicleService.findAllVehiclesAsStoredProcedure();
+    }
+    // FIND STOPS
+    public Collection<StopEntity> findAllStops(){
+        return stopService.findAll();
+    }
+    public Collection<StopEntity> findAllStopsAsNative(){
+        return stopService.findAllAsNatie();
+    }
+    public Collection<StopEntity> findAllStopsAsNamed(){
+        return stopService.findAllVehiclesAsNamed();
+    }
+    public Collection<StopEntity> findAllStopsAsCriteria(){
+        return stopService.findAllVehiclesAsCriteria();
+    }
+    public Collection<StopEntity> findAllStopsAsStoredProcedure(){
+        return stopService.findAllVehiclesAsStoredProcedure();
+    }
+    // FIND Journeys
+    public Collection<JourneyEntity> findAllJourneys(){
+        return journeyService.findAll();
+    }
+    public Collection<JourneyEntity> findAllJourneysAsNative(){
+        return journeyService.findAllAsNatie();
+    }
+    public Collection<JourneyEntity> findAllJourneysAsNamed(){
+        return journeyService.findAllVehiclesAsNamed();
+    }
+    public Collection<JourneyEntity> findAllJourneysAsCriteria(){
+        return journeyService.findAllVehiclesAsCriteria();
+    }
+    public Collection<JourneyEntity> findAllJourneysAsStoredProcedure(){
+        return journeyService.findAllVehiclesAsStoredProcedure();
+    }
+
+
+    public void removeVehicleStop(StopEntity stopEntity){
+        stopService.remove(stopEntity);
+    }
+
+    public void removeVehicleStopByID(Long ID) {
+        stopService.removeByID(ID);
+    }
+
+    public Collection<VehicleEntity> getAllVehiclesSortedByID(int start, int max) {
+        return vehicleService.getAllVehiclesSortedByID(start, max);
+    }
+
+    public Collection<StopEntity> getAllStopsSortedByID(int start, int max) {
+        return stopService.getAllStopsSortedByID(start, max);
+    }
+
+    public Collection<JourneyEntity> getAllJourneysSortedByID(int start, int max) {
+        return journeyService.getAllJourneysSortedByID(start, max);
+    }
+
+    public Collection<VehicleEntity> getAllVehicleSortedByName(int start, int max){
+        return vehicleService.getAllVehiclesSortedByName(start, max);
+    }
+
+    public Collection<VehicleEntity> getAllVehiclesSortedByActive(int start, int max){
+        return vehicleService.getAllVehiclesSortedByActive(start, max);
+    }
+    public Collection<StopEntity> getAllStopsortedByActive(int start, int max){
+        return stopService.getAllStopsSortedByActive(start, max);
+    }
+    public Collection<JourneyEntity> getAllJourneysSortedByActive(int start, int max){
+        return journeyService.getAllJourneysSortedByActive(start, max);
     }
 }

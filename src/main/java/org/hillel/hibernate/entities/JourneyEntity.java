@@ -12,13 +12,27 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.StringJoiner;
+import org.hibernate.annotations.NamedQueries;
+import org.hibernate.annotations.NamedQuery;
 
 @Entity
-@Table (name = "journey", uniqueConstraints = @UniqueConstraint(name = "uniq_station_from_to", columnNames = {"stationFrom", "stationTo"}))
+@Table (name = "journey", uniqueConstraints = @UniqueConstraint(name = "uniq_station_from_to", columnNames = {"departure", "arrival"}))
 @Getter
 @Setter
 @NoArgsConstructor
 @DynamicUpdate
+@NamedQueries(value = {
+        @NamedQuery(name = "findAllJourneys",
+                query = "from JourneyEntity ")
+})
+@NamedStoredProcedureQueries(value = {
+        @NamedStoredProcedureQuery(
+                name = "findAllJourneys",
+                procedureName = "find_all_journeys",
+                parameters = @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, type = Class.class),
+                resultClasses = JourneyEntity.class
+        )
+})
 public class JourneyEntity extends AbstractModifyEntity<Long> {
 
     @Override
@@ -40,10 +54,10 @@ public class JourneyEntity extends AbstractModifyEntity<Long> {
     @Column(name = "station_to", length = 50, nullable = false, columnDefinition = "varchar(100) default 'NONE'")
     private String stationTo;
 
-    @Column(name = "dateFrom", nullable = false)
+    @Column(name = "departure", nullable = false)
     private Instant dateFrom;
 
-    @Column(name = "dateTo", nullable = false)
+    @Column(name = "arrival", nullable = false)
     private Instant dateTo;
 
     @Column(name = "direction", length = 20)

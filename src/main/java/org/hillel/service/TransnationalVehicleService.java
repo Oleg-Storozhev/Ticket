@@ -46,11 +46,6 @@ public class TransnationalVehicleService {
     @Autowired
     private NewTransnationalVehicleService newTransnationalVehicleService;
 
-    @Transactional(readOnly = true)
-    public Collection<VehicleEntity> findAll(){
-        return vehicleRepository.findAll();
-    }
-
     @Transactional
     public Collection<VehicleEntity> findAllByName(String name){
         final Collection<VehicleEntity> byName = vehicleRepository.findByName(name);
@@ -59,5 +54,43 @@ public class TransnationalVehicleService {
         System.out.println("Save vehicle with id =" + next.getId() + "and new value "+ next.getName());
         newTransnationalVehicleService.createOrUpdate(next);
         return byName;
+    }
+
+    public void removeByID(Long id) {
+        vehicleRepository.removeById(id);
+    }
+
+    @Transactional(readOnly = true)
+    public Collection<VehicleEntity> findAll(){
+        return vehicleRepository.findAll();
+    }
+    @Transactional
+    public Collection<VehicleEntity> findAllAsNatie() {
+       return vehicleRepository.findAllAsNative();
+    }
+    @Transactional
+    public Collection<VehicleEntity> findAllVehiclesAsNamed() {
+        return vehicleRepository.findAllAsNamed();
+    }
+    @Transactional
+    public Collection<VehicleEntity> findAllVehiclesAsCriteria() {
+        return vehicleRepository.findAllAsCriteria();
+    }
+    @Transactional
+    public Collection<VehicleEntity> findAllVehiclesAsStoredProcedure() {
+        return vehicleRepository.findAllAsStoredProcedure();
+    }
+
+    @Transactional
+    public Collection<VehicleEntity> getAllVehiclesSortedByID(int start, int max) {
+        return vehicleRepository.findAllSortedByID(start, max);
+    }
+    @Transactional
+    public Collection<VehicleEntity> getAllVehiclesSortedByName(int start, int max) {
+        return vehicleRepository.findAllSortedByName(start, max);
+    }
+    @Transactional
+    public Collection<VehicleEntity> getAllVehiclesSortedByActive(int start, int max) {
+        return vehicleRepository.findAllSortedByActive(start, max);
     }
 }

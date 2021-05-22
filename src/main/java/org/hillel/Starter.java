@@ -26,8 +26,15 @@ public class Starter {
         journeyEntity.addVechicle(vehicleEntity);
         ticketClient.createOrUpdateJourney(journeyEntity);
 
+        System.out.println("HW 4");
         System.out.println("delete vehicle");
         ticketClient.removeVehicle(vehicleEntity);
+        ticketClient.removeVehicleByID(0L);
+
+        System.out.println("delete stop");
+        StopEntity stopEntity = buildStop(12.0, 13.0);
+        ticketClient.removeVehicleStop(stopEntity);
+        ticketClient.removeVehicleStopByID(0L);
 
         System.out.println(ticketClient.findVehicleById(1L, true));
         System.out.println(ticketClient.findAllVehicles());

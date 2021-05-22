@@ -94,8 +94,12 @@ public class TicketClient {
         journeyService.removeByID(ID);
     }
 
-    public void removeVehicle(final VehicleEntity vehicalEntity){
-        vehicleService.remove(vehicalEntity);
+    public void removeVehicle(final VehicleEntity vehicleEntity){
+        vehicleService.remove(vehicleEntity);
+    }
+
+    public void removeVehicleByID(Long ID) {
+        vehicleService.removeByID(ID);
     }
 
     public Collection<VehicleEntity> findByids(Long ... ids){
@@ -109,4 +113,13 @@ public class TicketClient {
     public Collection<VehicleEntity> findAllVehicles(){
         return vehicleService.findAll();
     }
+
+    public void removeVehicleStop(StopEntity stopEntity){
+        stopService.remove(stopEntity);
+    }
+
+    public void removeVehicleStopByID(Long ID) {
+        stopService.removeByID(ID);
+    }
+
 }

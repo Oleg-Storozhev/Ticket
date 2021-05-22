@@ -60,4 +60,8 @@ public class TransnationalVehicleService {
         newTransnationalVehicleService.createOrUpdate(next);
         return byName;
     }
+
+    public void removeByID(Long id) {
+        vehicleRepository.removeById(id);
+    }
 }

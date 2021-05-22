@@ -2,12 +2,12 @@ package org.hillel.config;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import org.hibernate.dialect.PostgreSQL10Dialect;
 import org.postgresql.ds.PGSimpleDataSource;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.core.env.Environment;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
@@ -22,40 +22,53 @@ import java.io.InputStream;
 import java.util.Properties;
 
 @Configuration
-@PropertySource("classpath:database.properties")
+@PropertySource({"classpath:database.properties"})
 @EnableTransactionManagement
 public class DatabaseConfig {
 
-    @Autowired
-    private Environment environment;
-
     @Bean
-    public DataSource dataSource(){
+    public DataSource dataSource(@Value("${database.username}") String userName,
+                                 @Value("${database.password}") String password,
+                                 @Value("${database.url}") String url,
+                                 @Value("${database.name}") String database){
         HikariConfig config = new HikariConfig();
-        config.setUsername(environment.getProperty("database.username"));
-        config.setPassword(environment.getProperty("database.password"));
-        config.setJdbcUrl(environment.getProperty("database.url"));
-        config.addDataSourceProperty("databaseName", environment.getProperty("database.name"));
+        config.setUsername(userName);
+        config.setPassword(password);
+        config.setJdbcUrl(url);
+        config.addDataSourceProperty("databaseName", database);
         config.setDataSourceClassName(PGSimpleDataSource.class.getName());
         config.setMinimumIdle(30);
         config.setMaximumPoolSize(150);
-        HikariDataSource dataSource = new HikariDataSource(config);
-        return dataSource;
+        return new HikariDataSource(config);
     }
     @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory() throws IOException {
+    public LocalContainerEntityManagerFactoryBean emf(
+            DataSource dataSource,
+            @Value("${hibernate.dialect}") String dialect,
+            @Value("${hibernate.hbm2ddl}") String hdb2ddl,
+            @Value("${hibernate.show_sql}") String show_sql,
+            @Value("${hibernate.query.timeout}") String timeout) throws IOException {
         LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
-        emf.setDataSource(dataSource());
+        emf.setDataSource(dataSource);
         emf.setPackagesToScan("hibernate.properties");
         emf.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
-        emf.setJpaProperties(getHibernateProperties());
+        System.out.println("Setting properties...");
+        Properties properties= new Properties();
+        properties.put("hibernate.dialect", PostgreSQL10Dialect.class.getName());
+        properties.put("hibernate.hbm2ddl.auto", "update");
+        properties.put("hibernate.show_sql", "true");
+        properties.put("javax.persistence.query.timeout", 300000);
+        emf.setJpaProperties(properties);
+        System.out.println("Finished setting properties");
         return emf;
     }
     @Bean
-    public PlatformTransactionManager transactionManager(EntityManagerFactory entityManagerFactory){
+    public PlatformTransactionManager transactionManager(
+            EntityManagerFactory entityManagerFactory,
+            DataSource dataSource){
         JpaTransactionManager jpaTransactionManager = new JpaTransactionManager();
         jpaTransactionManager.setEntityManagerFactory(entityManagerFactory);
-        jpaTransactionManager.setDataSource(dataSource());
+        jpaTransactionManager.setDataSource(dataSource);
         System.out.println("Finished with transactionManager");
         return jpaTransactionManager;
     }
@@ -63,18 +76,5 @@ public class DatabaseConfig {
     @Bean
     public TransactionTemplate transactionTemplate(final PlatformTransactionManager platformTransactionManager){
         return new TransactionTemplate(platformTransactionManager);
-    }
-
-    public Properties getHibernateProperties() throws IOException {
-        System.out.println("Getting Properties");
-        try {
-            Properties properties = new Properties();
-            InputStream is = getClass().getClassLoader().getResourceAsStream("hibernate.properties");
-            properties.load(is);
-            System.out.println("Finished Getting Properties");
-            return properties;
-        } catch (IOException e){
-            throw new IllegalArgumentException("Can't find 'hibernate.properties' in classpath!", e);
-        }
     }
 }

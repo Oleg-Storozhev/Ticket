@@ -44,7 +44,7 @@ public class JourneyRepository extends CommonRepository<JourneyEntity,Long>{
         return entityManager;
     }
 
-    @Override
+/*    @Override
     public Collection<JourneyEntity> findAll() {
         return entityManager.createQuery("select v from JourneyEntity v").getResultList();
     }
@@ -74,7 +74,6 @@ public class JourneyRepository extends CommonRepository<JourneyEntity,Long>{
                 .registerStoredProcedureParameter(2, String.class, ParameterMode.IN)
                 .setParameter(2,JourneyEntity.class.getAnnotation(Table.class))
                 .getResultList();
-    }
-
+    }*/
 
 }

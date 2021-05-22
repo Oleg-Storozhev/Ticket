@@ -3,12 +3,13 @@ package org.hillel.hibernate.entities;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hillel.hibernate.util.CommonInfo;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import org.hibernate.annotations.NamedQueries;
+import org.hibernate.annotations.NamedQuery;
 
 @Entity
 @Table(name = "stop")
@@ -16,6 +17,18 @@ import java.util.ArrayList;
 @Setter
 @NoArgsConstructor
 @DynamicUpdate
+@NamedQueries(value = {
+        @NamedQuery(name = "findAllStops",
+                query = "from StopEntity")
+})
+@NamedStoredProcedureQueries(value = {
+        @NamedStoredProcedureQuery(
+                name = "findAllStops",
+                procedureName = "find_all_stops",
+                parameters = @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, type = Class.class),
+                resultClasses = StopEntity.class
+        )
+})
 public class StopEntity extends AbstractModifyEntity<Long> {
 
     @Embedded
@@ -36,7 +49,6 @@ public class StopEntity extends AbstractModifyEntity<Long> {
 
     public void addJourney(JourneyEntity journeyEntity) {
         if(journeyEntity == null) return;
-        // todo ask
         ArrayList<JourneyEntity> journeys = new ArrayList<>();
 
         if(journeys == null) journeys = new ArrayList<>();

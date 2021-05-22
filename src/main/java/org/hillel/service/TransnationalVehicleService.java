@@ -90,4 +90,8 @@ public class TransnationalVehicleService {
     public Collection<VehicleEntity> getAllVehiclesSortedByName(int start, int max) {
         return vehicleRepository.findAllSortedByName(start, max);
     }
+
+    public Collection<VehicleEntity> getAllVehiclesSortedByActive(int start, int max) {
+        return vehicleRepository.findAllSortedByActive(start, max);
+    }
 }

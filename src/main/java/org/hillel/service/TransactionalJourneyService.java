@@ -82,5 +82,9 @@ public class TransactionalJourneyService {
     public Collection<JourneyEntity> getAllJourneysSortedByID(int start, int max) {
         return journeyRepository.findAllSortedByID(start, max);
     }
+
+    public Collection<JourneyEntity> getAllJourneysSortedByActive(int start, int max) {
+        return journeyRepository.findAllSortedByActive(start, max);
+    }
 }
 

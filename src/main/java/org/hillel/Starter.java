@@ -64,8 +64,12 @@ public class Starter {
         System.out.println(ticketClient.getAllStopsSortedByID(0,10));
         System.out.println(ticketClient.getAllVehiclesSortedByID(0,10));
         System.out.println(ticketClient.getAllVehicleSortedByName(0,10));
+        System.out.println(ticketClient.getAllVehiclesSortedByActive(0,10));
+        System.out.println(ticketClient.getAllJourneysSortedByActive(0,10));
+        System.out.println(ticketClient.getAllStopsortedByActive(0,10));
 
-/*        ticketClient.removeById(journeyEntity.getId());
+
+        ticketClient.removeById(journeyEntity.getId());
 
         journeyEntity = ticketClient.createOrUpdateJourney(journeyEntity);
         journeyEntity.addStop(buildStop(1D, 2D));
@@ -75,7 +79,7 @@ public class Starter {
         journeyEntity.getStops().get(0).setActive(false);
         journeyEntity.addStop(buildStop(2D,3D));
         System.out.println("call");
-        ticketClient.createOrUpdateJourney(journeyEntity);*/
+        ticketClient.createOrUpdateJourney(journeyEntity);
 
 
     }

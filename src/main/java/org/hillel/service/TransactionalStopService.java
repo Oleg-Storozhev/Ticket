@@ -52,4 +52,8 @@ public class TransactionalStopService {
     public Collection<StopEntity> getAllStopsSortedByID(int start, int max) {
         return stopRepository.findAllSortedByID(start, max);
     }
+
+    public Collection<StopEntity> getAllStopsSortedByActive(int start, int max) {
+        return stopRepository.findAllSortedByActive(start, max);
+    }
 }

@@ -125,4 +125,12 @@ public abstract class CommonRepository<E extends AbstractModifyEntity<ID>, ID ex
                 .setMaxResults(max)
                 .getResultList();
     }
+
+    public Collection<E> findAllSortedByActive(int start, int max) {
+        return entityManager
+                .createQuery("from " + entityClass.getSimpleName() + " order by active", entityClass)
+                .setFirstResult(start)
+                .setMaxResults(max)
+                .getResultList();
+    }
 }

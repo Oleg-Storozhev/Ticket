@@ -81,4 +81,12 @@ public class VehicleRepository extends CommonRepository<VehicleEntity, Long> {
                 .setMaxResults(max)
                 .getResultList();
     }
+
+    public Collection<VehicleEntity> findAllSortedByActive(int start, int max) {
+        return entityManager
+                .createQuery("select v from VehicleEntity v order by v.active")
+                .setFirstResult(start)
+                .setMaxResults(max)
+                .getResultList();
+    }
 }

@@ -180,12 +180,16 @@ public class TicketClient {
     }
 
     public Collection<VehicleEntity> getAllVehicleSortedByName(int start, int max){
-        if(start < 0)
-            start*=-1;
-        if(max < 0)
-            max*=-1;
-
         return vehicleService.getAllVehiclesSortedByName(start, max);
     }
 
+    public Collection<VehicleEntity> getAllVehiclesSortedByActive(int start, int max){
+        return vehicleService.getAllVehiclesSortedByActive(start, max);
+    }
+    public Collection<StopEntity> getAllStopsortedByActive(int start, int max){
+        return stopService.getAllStopsSortedByActive(start, max);
+    }
+    public Collection<JourneyEntity> getAllJourneysSortedByActive(int start, int max){
+        return journeyService.getAllJourneysSortedByActive(start, max);
+    }
 }

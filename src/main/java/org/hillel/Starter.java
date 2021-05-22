@@ -59,6 +59,12 @@ public class Starter {
         System.out.println(ticketClient.findAllVehicles());
         System.out.println(ticketClient.findByids(1L, 2L, 3L,4L,5L));
 
+        System.out.println("HW 6");
+        System.out.println(ticketClient.getAllJourneysSortedByID(0,10));
+        System.out.println(ticketClient.getAllStopsSortedByID(0,10));
+        System.out.println(ticketClient.getAllVehiclesSortedByID(0,10));
+        System.out.println(ticketClient.getAllVehicleSortedByName(0,10));
+
 /*        ticketClient.removeById(journeyEntity.getId());
 
         journeyEntity = ticketClient.createOrUpdateJourney(journeyEntity);

@@ -4,6 +4,7 @@ import lombok.SneakyThrows;
 import org.hibernate.Session;
 import org.hibernate.annotations.Table;
 import org.hillel.hibernate.entities.AbstractModifyEntity;
+import org.hillel.hibernate.entities.JourneyEntity;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.Assert;
 
@@ -117,11 +118,11 @@ public abstract class CommonRepository<E extends AbstractModifyEntity<ID>, ID ex
                 .getResultList();
     }
 
-    public Collection<E> findAllSortedByID(){
+    public Collection<E> findAllSortedByID(int start, int max){
         return entityManager
                 .createQuery("from "+ entityClass.getSimpleName() + " order by id", entityClass)
-                .setFirstResult(0)
-                .setMaxResults(10)
+                .setFirstResult(start)
+                .setMaxResults(max)
                 .getResultList();
     }
 }

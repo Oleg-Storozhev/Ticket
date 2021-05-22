@@ -49,7 +49,7 @@ public class TransactionalStopService {
         return stopRepository.findAllAsStoredProcedure();
     }
 
-    public Collection<StopEntity> getAllStopsSortedByID() {
-        return stopRepository.findAllSortedByID();
+    public Collection<StopEntity> getAllStopsSortedByID(int start, int max) {
+        return stopRepository.findAllSortedByID(start, max);
     }
 }

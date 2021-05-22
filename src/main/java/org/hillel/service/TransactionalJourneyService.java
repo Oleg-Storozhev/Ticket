@@ -79,8 +79,8 @@ public class TransactionalJourneyService {
         return journeyRepository.findAllAsStoredProcedure();
     }
 
-    public Collection<JourneyEntity> getAllJourneysSortedByID() {
-        return journeyRepository.findAllSortedByID();
+    public Collection<JourneyEntity> getAllJourneysSortedByID(int start, int max) {
+        return journeyRepository.findAllSortedByID(start, max);
     }
 }
 

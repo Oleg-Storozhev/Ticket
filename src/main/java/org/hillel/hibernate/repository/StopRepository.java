@@ -52,10 +52,11 @@ public class StopRepository extends CommonRepository<StopEntity, Long> {
     }
 
 
-    public Collection<StopEntity> findAllSortedByID() {
+    public Collection<StopEntity> findAllSortedByID(int start, int max) {
         return entityManager
-                .createQuery("select v from StopEntity v order by v.id").setFirstResult(0)
-                .setMaxResults(10)
+                .createQuery("select v from StopEntity v order by v.id")
+                .setFirstResult(start)
+                .setMaxResults(max)
                 .getResultList();
     }
 }

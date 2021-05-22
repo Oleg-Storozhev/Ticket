@@ -167,16 +167,25 @@ public class TicketClient {
         stopService.removeByID(ID);
     }
 
-    public Collection<VehicleEntity> getAllVehiclesSortedByID(String sortBy) {
-        return vehicleService.getAllVehiclesSortedByID();
+    public Collection<VehicleEntity> getAllVehiclesSortedByID(int start, int max) {
+        return vehicleService.getAllVehiclesSortedByID(start, max);
     }
 
-    public Collection<StopEntity> getAllStopsSortedByID() {
-        return stopService.getAllStopsSortedByID();
+    public Collection<StopEntity> getAllStopsSortedByID(int start, int max) {
+        return stopService.getAllStopsSortedByID(start, max);
     }
 
-    public Collection<JourneyEntity> getAllJourneysSortedByID() {
-        return journeyService.getAllJourneysSortedByID();
+    public Collection<JourneyEntity> getAllJourneysSortedByID(int start, int max) {
+        return journeyService.getAllJourneysSortedByID(start, max);
+    }
+
+    public Collection<VehicleEntity> getAllVehicleSortedByName(int start, int max){
+        if(start < 0)
+            start*=-1;
+        if(max < 0)
+            max*=-1;
+
+        return vehicleService.getAllVehiclesSortedByName(start, max);
     }
 
 }

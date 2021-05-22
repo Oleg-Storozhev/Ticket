@@ -1,5 +1,6 @@
 package org.hillel.service;
 
+import org.hillel.hibernate.entities.JourneyEntity;
 import org.hillel.hibernate.entities.VehicleEntity;
 import org.hillel.hibernate.repository.VehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,7 +83,11 @@ public class TransnationalVehicleService {
         return vehicleRepository.findAllAsStoredProcedure();
     }
 
-    public Collection<VehicleEntity> getAllVehiclesSortedByID() {
-        return (List<VehicleEntity>) vehicleRepository.findAllSortedByID();
+    public Collection<VehicleEntity> getAllVehiclesSortedByID(int start, int max) {
+        return vehicleRepository.findAllSortedByID(start, max);
+    }
+
+    public Collection<VehicleEntity> getAllVehiclesSortedByName(int start, int max) {
+        return vehicleRepository.findAllSortedByName(start, max);
     }
 }

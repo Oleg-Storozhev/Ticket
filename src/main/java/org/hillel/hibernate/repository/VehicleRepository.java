@@ -67,11 +67,18 @@ public class VehicleRepository extends CommonRepository<VehicleEntity, Long> {
             .getResultList();
     }
 
-    public Collection<VehicleEntity> findAllSortedByID() {
+    public Collection<VehicleEntity> findAllSortedByID(int start, int max) {
         return entityManager
                 .createQuery("select v from VehicleEntity v order by v.id")
-                .setFirstResult(0)
-                .setMaxResults(10)
+                .setFirstResult(start)
+                .setMaxResults(max)
+                .getResultList();
+    }
+    public Collection<VehicleEntity> findAllSortedByName(int start, int max){
+        return entityManager
+                .createQuery("select v from VehicleEntity v order by v.name")
+                .setFirstResult(start)
+                .setMaxResults(max)
                 .getResultList();
     }
 }

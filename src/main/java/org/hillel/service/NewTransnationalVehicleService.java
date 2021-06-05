@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Optional;
 
@@ -27,7 +28,7 @@ public class NewTransnationalVehicleService {
     }
 
     public Collection<VehicleEntity> findByIds(Long ... ids){
-        return vehicleRepository.findByIds(ids);
+        return vehicleRepository.findAllByIds(Arrays.asList(ids));
     }
 
     @Transactional(readOnly = true)

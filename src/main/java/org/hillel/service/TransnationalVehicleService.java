@@ -3,6 +3,7 @@ package org.hillel.service;
 import org.hillel.hibernate.entities.VehicleEntity;
 import org.hillel.hibernate.jpa.repository.VehicleJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,7 +29,7 @@ public class TransnationalVehicleService {
 
     @Transactional
     public Collection<VehicleEntity> findByIds(Long ... ids){
-        return (Collection<VehicleEntity>) vehicleRepository.findAllById(Arrays.asList(ids));
+        return (Collection<VehicleEntity>) vehicleRepository.findAllByIds(Arrays.asList(ids));
     }
 
     @Transactional(readOnly = true)
@@ -56,5 +57,17 @@ public class TransnationalVehicleService {
     public Collection<VehicleEntity> findAllByName(String name){
         final Collection<VehicleEntity> byName = vehicleRepository.findByName(name);
         return byName;
+    }
+
+    public Collection<VehicleEntity> getAllVehicleSortedByName(String name, PageRequest of) {
+        return vehicleRepository.findAllByNameOrderByName(name, of);
+    }
+
+    public Collection<VehicleEntity> findAllSortedByID(PageRequest of) {
+        return findAllSortedByID(of);
+    }
+
+    public Collection<VehicleEntity> findAllSortedByActive(PageRequest of) {
+        return vehicleRepository.findAllSortedByActive(of);
     }
 }

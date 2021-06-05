@@ -3,9 +3,11 @@ package org.hillel.service;
 import org.hillel.hibernate.entities.JourneyEntity;
 import org.hillel.hibernate.jpa.repository.JourneyJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collection;
 import java.util.Optional;
 
 @Service
@@ -37,6 +39,18 @@ public class TransactionalJourneyService {
     @Transactional
     public void removeByID(Long ID) {
         journeyRepository.deleteById(ID);
+    }
+
+    public Collection<JourneyEntity> findAll() {
+        return (Collection<JourneyEntity>) journeyRepository.findAll();
+    }
+
+    public Collection<JourneyEntity> findAllSortedByID(PageRequest of) {
+        return journeyRepository.findAllSortedByID(of);
+    }
+
+    public Collection<JourneyEntity> findAllSortedByActive(PageRequest of) {
+        return journeyRepository.findAllSortedByActive(of);
     }
 }
 

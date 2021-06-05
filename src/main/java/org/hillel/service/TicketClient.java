@@ -7,6 +7,7 @@ import org.hillel.hibernate.entities.VehicleEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
@@ -108,5 +109,41 @@ public class TicketClient {
 
     public Collection<VehicleEntity> findAllVehicles(){
         return vehicleService.findAll();
+    }
+
+    public Collection<StopEntity> findAllStops() {
+        return stopService.findAll();
+    }
+
+    public Collection<JourneyEntity> findAllJourneys() {
+        return journeyService.findAll();
+    }
+
+    public Collection<VehicleEntity> getAllVehicleSortedByName(String name,PageRequest of) {
+        return vehicleService.getAllVehicleSortedByName(name,of);
+    }
+
+    public Collection<JourneyEntity> getAllJourneysSortedByID(PageRequest of) {
+        return journeyService.findAllSortedByID(of);
+    }
+
+    public Collection<StopEntity> getAllStopsSortedByID(PageRequest of) {
+        return stopService.findAllSortedByID(of);
+    }
+
+    public Collection<VehicleEntity> getAllVehiclesSortedByID(PageRequest of) {
+        return vehicleService.findAllSortedByID(of);
+    }
+
+    public Collection<StopEntity> getAllStopSortedByActive(PageRequest of) {
+        return stopService.findAllSortedByActive(of);
+    }
+
+    public Collection<VehicleEntity> getAllVehiclesSortedByActive(PageRequest of) {
+        return vehicleService.findAllSortedByActive(of);
+    }
+
+    public Collection<JourneyEntity> getAllJourneysSortedByActive(PageRequest of) {
+        return journeyService.findAllSortedByActive(of);
     }
 }

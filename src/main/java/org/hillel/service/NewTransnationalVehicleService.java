@@ -1,16 +1,13 @@
 package org.hillel.service;
 
 import org.hillel.hibernate.entities.VehicleEntity;
-import org.hillel.hibernate.repository.VehicleRepository;
+import org.hillel.hibernate.jpa.repository.VehicleJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.transaction.support.TransactionTemplate;
 
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.PersistenceContext;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Optional;
 
@@ -18,25 +15,25 @@ import java.util.Optional;
 public class NewTransnationalVehicleService {
 
     @Autowired
-    private VehicleRepository vehicleRepository;
+    private VehicleJpaRepository vehicleRepository;
 
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public VehicleEntity createOrUpdate(VehicleEntity vehicleEntity){
-        return vehicleRepository.createOrUpdate(vehicleEntity);
+        return vehicleRepository.save(vehicleEntity);
     }
 
     @Transactional(propagation = Propagation.NEVER)
     public void remove(VehicleEntity vehicalEntity){
-        vehicleRepository.remove(vehicalEntity);
+        vehicleRepository.delete(vehicalEntity);
     }
 
     public Collection<VehicleEntity> findByIds(Long ... ids){
-        return vehicleRepository.findByIds(ids);
+        return vehicleRepository.findAllByIds(Arrays.asList(ids));
     }
 
     @Transactional(readOnly = true)
     public Optional<VehicleEntity> findById(Long id, boolean withDep){
-        final Optional<VehicleEntity> byID = vehicleRepository.findByID(id);
+        final Optional<VehicleEntity> byID = vehicleRepository.findById(id);
         if(byID.isPresent()){
             return byID;
         }
@@ -49,6 +46,6 @@ public class NewTransnationalVehicleService {
 
     @Transactional(readOnly = true)
     public Collection<VehicleEntity> findAll(){
-        return vehicleRepository.findAll();
+        return (Collection<VehicleEntity>) vehicleRepository.findAll();
     }
 }

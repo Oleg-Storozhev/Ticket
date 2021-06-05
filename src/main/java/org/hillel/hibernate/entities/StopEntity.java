@@ -3,7 +3,6 @@ package org.hillel.hibernate.entities;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hillel.hibernate.util.CommonInfo;
 

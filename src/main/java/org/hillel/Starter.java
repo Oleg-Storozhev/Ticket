@@ -1,4 +1,5 @@
 package org.hillel;
+
 import org.hillel.config.RootConfig;
 import org.hillel.hibernate.entities.JourneyEntity;
 import org.hillel.hibernate.entities.StopAddInfoEntity;
@@ -8,6 +9,7 @@ import org.hillel.hibernate.enums.DirectionType;
 import org.hillel.service.TicketClient;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.data.domain.PageRequest;
 
 import java.time.Instant;
 
@@ -25,6 +27,7 @@ public class Starter {
         vehicleEntity.setName("bus 2");
         journeyEntity.addVechicle(vehicleEntity);
         ticketClient.createOrUpdateJourney(journeyEntity);
+        StopEntity stopEntity = buildStop(1D, 2D);
 
         System.out.println("delete vehicle");
         ticketClient.removeVehicle(vehicleEntity);
@@ -33,18 +36,22 @@ public class Starter {
         System.out.println(ticketClient.findAllVehicles());
         System.out.println(ticketClient.findByids(1L, 2L, 3L,4L,5L));
 
-/*        ticketClient.removeById(journeyEntity.getId());
+        System.out.println("HW 7");
+        System.out.println(ticketClient.findAllVehicles());
+        System.out.println(ticketClient.findAllStops());
+        System.out.println(ticketClient.findAllJourneys());
 
-        journeyEntity = ticketClient.createOrUpdateJourney(journeyEntity);
-        journeyEntity.addStop(buildStop(1D, 2D));
+        System.out.println(ticketClient.findVehicleById(1L, true));
+        System.out.println(ticketClient.findAllVehicles());
+        System.out.println(ticketClient.findByids(1L, 2L, 3L,4L,5L));
 
-        System.out.println("call create journey");
-        journeyEntity = ticketClient.createOrUpdateJourney(journeyEntity);
-        journeyEntity.getStops().get(0).setActive(false);
-        journeyEntity.addStop(buildStop(2D,3D));
-        System.out.println("call");
-        ticketClient.createOrUpdateJourney(journeyEntity);*/
-
+        System.out.println(ticketClient.getAllJourneysSortedByID(PageRequest.of(0,10)));
+        System.out.println(ticketClient.getAllStopsSortedByID(PageRequest.of(0,10)));
+        System.out.println(ticketClient.getAllVehiclesSortedByID(PageRequest.of(0,10)));
+        System.out.println(ticketClient.getAllVehicleSortedByName("Name 1", PageRequest.of(0,10)));
+        System.out.println(ticketClient.getAllVehiclesSortedByActive(PageRequest.of(0,10)));
+        System.out.println(ticketClient.getAllJourneysSortedByActive(PageRequest.of(0,10)));
+        System.out.println(ticketClient.getAllStopSortedByActive(PageRequest.of(0,10)));
 
     }
     private static JourneyEntity buildJourney(final String from, final String to, final Instant dateFrom, final Instant dateTo){

@@ -45,7 +45,6 @@ public class Starter {
         System.out.println("call");
         ticketClient.createOrUpdateJourney(journeyEntity);*/
 
-
     }
     private static JourneyEntity buildJourney(final String from, final String to, final Instant dateFrom, final Instant dateTo){
         final JourneyEntity journeyEntity = new JourneyEntity();
